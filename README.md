@@ -18,6 +18,8 @@
 - 支持日志文件信息可选择打印。
 - 支持打印线程信息。
 - 支持打印方法的数量。
+- 支持捕捉并打印崩溃日志。
+- 支持自定义崩溃日志处理。
 
 ## 1、演示
 
@@ -89,6 +91,7 @@ IFormatStrategy formatStrategy = DiskFormatStrategy.newBuilder()  //日志格式
 Logger.newBuilder("DiskLogger")
         .setFormatStrategy(formatStrategy)                        //设置日志格式策略
         .build();
+CrashHandler.getInstance().setOnCrashListener(new SendEmailCrashListener()); //增加崩溃发送email的监听处理
 ```
 ### 2.4、日志记录
 ```
