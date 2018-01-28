@@ -28,7 +28,7 @@ import android.widget.Toast;
  */
 public class ToastCrashListener implements OnCrashListener {
     /**
-     * 发生奔溃
+     * 发生崩溃
      *
      * @param context
      * @param crashHandler

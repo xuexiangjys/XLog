@@ -31,6 +31,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 /**
  * 在Application中统一捕获异常，保存到文件中下次再打开时上传
+ *
  * @author xuexiang
  * @date 2018/1/28 下午10:03
  */
@@ -104,18 +105,18 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
         mTimeFormat = DEFAULT_CRASH_LOG_TIME_FORMAT;
     }
 
-	/**
+    /**
      * 获取CrashHandler实例 ,单例模式
      */
     public static CrashHandler getInstance() {
-		if (sInstance == null) {
-			synchronized (CrashHandler.class) {
-				if (sInstance == null) {
-					sInstance = new CrashHandler();
-				}
-			}
-		}
-		return sInstance;
+        if (sInstance == null) {
+            synchronized (CrashHandler.class) {
+                if (sInstance == null) {
+                    sInstance = new CrashHandler();
+                }
+            }
+        }
+        return sInstance;
     }
 
     /**
@@ -132,6 +133,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
 
     /**
      * 设置崩溃监听
+     *
      * @param listener
      * @return
      */
@@ -148,6 +150,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
 
     /**
      * 是否需要重启
+     *
      * @param isNeedReopen
      * @return
      */
@@ -198,7 +201,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
                 Intent intent = new Intent(mContext, StartAppReceiver.class);
                 PendingIntent restartIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
                 //退出程序
-                AlarmManager mgr = (AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+                AlarmManager mgr = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
                 mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, restartIntent); // 1秒钟后重启应用
             }
 
@@ -207,25 +210,26 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
         }
     }
 
-	/**
-	 * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成.
-	 * 
-	 * @param throwable
-	 * @return true:如果处理了该异常信息;否则返回false.
-	 */
-	private boolean handleException(Throwable throwable) {
-		if (throwable == null || mContext == null || mOnCrashListener == null) {
-			return false;
-		}
+    /**
+     * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成.
+     *
+     * @param throwable
+     * @return true:如果处理了该异常信息;否则返回false.
+     */
+    private boolean handleException(Throwable throwable) {
+        if (throwable == null || mContext == null || mOnCrashListener == null) {
+            return false;
+        }
         setIsHandledCrash(false);
         mCrashLogFile = saveCrashInfo(throwable); //保存崩溃信息到本地文件
         mOnCrashListener.onCrash(mContext, this, throwable);
         return true;
-	}
+    }
 
 
     /**
      * 保存崩溃信息
+     *
      * @param throwable
      * @return 崩溃日志文件
      */
@@ -235,6 +239,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
 
     /**
      * 获取崩溃报告
+     *
      * @param throwable
      * @return
      */
@@ -250,6 +255,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
 
     /**
      * 获取崩溃的信息
+     *
      * @param throwable
      * @return
      */

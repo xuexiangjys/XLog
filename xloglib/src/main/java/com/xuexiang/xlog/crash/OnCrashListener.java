@@ -28,7 +28,7 @@ public interface OnCrashListener {
 
 
     /**
-     * 发生奔溃
+     * 发生崩溃
      * @param context
      * @param crashHandler
      * @param throwable

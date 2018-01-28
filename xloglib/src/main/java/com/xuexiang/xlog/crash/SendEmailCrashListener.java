@@ -68,7 +68,7 @@ public class SendEmailCrashListener implements OnCrashListener {
         mCopyEmailAddress = copyEmailAddress;
     }
     /**
-     * 发生奔溃
+     * 发生崩溃
      *
      * @param context
      * @param crashHandler
