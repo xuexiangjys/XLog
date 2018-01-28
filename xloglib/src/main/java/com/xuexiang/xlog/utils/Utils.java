@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -157,6 +158,20 @@ public final class Utils {
             fileName = logPrefix + curDate + "_" + getCurSegment(logSegment, zoneOffset) + LOG_EXT;
         }
         return fileName;
+    }
+
+    /**
+     * 生成日志文件名.
+     *
+     * @param logPrefix  日志前缀
+     * @param zoneOffset 时区偏移
+     * @param fmt 时间格式
+     * @return 日志文件名
+     */
+    public static String getLogFileName(String logPrefix, @TimeUtils.ZoneOffset long zoneOffset, @NonNull String fmt) {
+        logPrefix = TextUtils.isEmpty(logPrefix) ? "" : logPrefix + "_";
+        String curDate = TimeUtils.getCurTime(zoneOffset, fmt);
+        return logPrefix + curDate + LOG_EXT;
     }
 
     /**
@@ -326,19 +341,18 @@ public final class Utils {
      * @return
      */
     public static String getDevicesInfo(@NonNull Context context) {
-        Map<String, String> logInfo = new HashMap<>();
+        Map<String, String> logInfo = new TreeMap<>();
         try {
             // 获得包管理器
             PackageManager packageManager = context.getPackageManager();
             // 得到该应用的信息，即主Activity
-            PackageInfo mPackageInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
-            if (mPackageInfo != null) {
-                String versionName = mPackageInfo.versionName == null ? "null" : mPackageInfo.versionName;
-                String versionCode = mPackageInfo.versionCode + "";
-                logInfo.put("versionName", versionName);
-                logInfo.put("versionCode", versionCode);
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+            if (packageInfo != null) {
+                logInfo.put("packageName", packageInfo.packageName);
+                logInfo.put("versionName", packageInfo.versionName);
+                logInfo.put("versionCode", String.valueOf(packageInfo.versionCode));
             }
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         // 反射机制

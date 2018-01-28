@@ -20,6 +20,7 @@ package com.xuexiang.xlog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.xuexiang.xlog.crash.CrashHandler;
 import com.xuexiang.xlog.logger.ILogger;
 import com.xuexiang.xlog.logger.Logger;
 
@@ -44,6 +45,7 @@ public class XLog implements ILogger {
 
     public static void init(Context context) {
         sContext = context.getApplicationContext();
+        CrashHandler.getInstance().init(sContext);
     }
 
     public static Context getContext() {
