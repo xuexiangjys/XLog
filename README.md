@@ -6,6 +6,19 @@
 ## 关于我
 [![github](https://img.shields.io/badge/GitHub-xuexiangjys-blue.svg)](https://github.com/xuexiangjys)   [![csdn](https://img.shields.io/badge/CSDN-xuexiangjys-green.svg)](http://blog.csdn.net/xuexiangjys)
 
+## 特点
+- 支持自定义日志格式策略IFormatStrategy和打印策略ILogStrategy。
+- 提供默认的两种日志打印方式：logcat（PrettyFormatStrategy）和磁盘打印（PrettyFormatStrategy）。
+- 兼容android logcat，VERBOSE、DEBUG、INFO、WARN、ERROR和WTF全都有，一个都不能少
+- 突破了logcat的4000字长度限制
+- 支持打印xml，json，模版String等形式。
+- 支持自定义日志文件存储形式（文件前缀、时间片存储等）。
+- 在日志文件的顶部，XLog提供了很多有用的运行环境相关的信息，比如操作系统信息、设备信息和应用信息
+- 支持时区设置。
+- 支持日志文件信息可选择打印。
+- 支持打印线程信息。
+- 支持打印方法的数量。
+
 ## 1、演示
 
 ### 1.1、logcat打印效果
@@ -94,8 +107,10 @@ try {
 ```
 
 
+## 特别感谢
+https://github.com/orhanobut/logger
 
-
+https://github.com/JiongBull/jlog
 
 
 
