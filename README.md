@@ -8,6 +8,30 @@
 
 ## 1、演示
 
+### 1.1、logcat打印效果
+
+打印debug信息和json日志
+![](https://github.com/xuexiangjys/XLog/blob/master/img/1.jpg)
+
+打印xml信息
+![](https://github.com/xuexiangjys/XLog/blob/master/img/2.jpg)
+
+打印出错信息
+![](https://github.com/xuexiangjys/XLog/blob/master/img/3.jpg)
+
+### 1.2、磁盘打印效果
+
+打印debug信息和json日志
+
+![](https://github.com/xuexiangjys/XLog/blob/master/img/6.jpg)
+
+打印xml信息
+
+![](https://github.com/xuexiangjys/XLog/blob/master/img/5.jpg)
+
+打印出错信息
+
+![](https://github.com/xuexiangjys/XLog/blob/master/img/4.jpg)
 
 ## 2、如何使用
 目前支持主流开发工具AndtoidStudio的使用，直接配置build.gradle，增加依赖即可.
