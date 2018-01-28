@@ -29,6 +29,7 @@ import java.util.Date;
 
 import static com.xuexiang.xlog.utils.Utils.CLASS_METHOD_LINE_FORMAT;
 import static com.xuexiang.xlog.utils.Utils.LINE_BREAK;
+import static com.xuexiang.xlog.utils.Utils.SINGLE_DIVIDER;
 
 /**
  * 磁盘日志格式化策略
@@ -36,7 +37,6 @@ import static com.xuexiang.xlog.utils.Utils.LINE_BREAK;
  * @date 2018/1/15 下午11:55
  */
 public class DiskFormatStrategy implements IFormatStrategy {
-    private static final String SINGLE_DIVIDER = "------------------------------------------------------------------------------------";
     /**
      * 日志需要显示的方法数
      */

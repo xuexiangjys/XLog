@@ -6,13 +6,11 @@ group='com.github.xuexiangjys' // 指定group，com.github.<用户名>
 android {
     compileSdkVersion 26
 
-
-
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

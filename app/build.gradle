@@ -26,6 +26,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':xloglib')
+
+//    implementation 'com.github.xuexiangjys:XLog:1.0.0'
     //Gson序列化反序列化的依赖包
     implementation 'com.google.code.gson:gson:2.6.2'
 }

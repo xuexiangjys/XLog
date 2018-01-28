@@ -25,6 +25,7 @@ import com.xuexiang.xlog.utils.PrinterUtils;
 import com.xuexiang.xlog.utils.TimeUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -161,6 +162,11 @@ public class DiskLogStrategy implements ILogStrategy {
 
         public Builder setLogLevels(List<String> logLevels) {
             this.logLevels = logLevels;
+            return this;
+        }
+
+        public Builder setLogLevels(@LogLevel String... logLevels) {
+            setLogLevels(Arrays.asList(logLevels));
             return this;
         }
 

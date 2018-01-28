@@ -60,6 +60,7 @@ import static com.xuexiang.xlog.utils.FileUtils.ZIP_EXT;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Utils {
     //    public static final String LINE_BREAK = "\r\n";// 换行符
+    public static final String SINGLE_DIVIDER = "------------------------------------------------------------------------------------";
     public static final String LINE_BREAK = System.lineSeparator();// 换行符
     public static final String CLASS_METHOD_LINE_FORMAT = "%s.%s()  Line:%d  (%s)\r\n\n";// 格式化日志信息
 
@@ -360,9 +361,7 @@ public final class Utils {
             String value = entry.getValue();
             sb.append(key + "=" + value + LINE_BREAK);
         }
-        sb.append(LINE_BREAK);
-        sb.append(LINE_BREAK);
-        sb.append("-------------------------------------------------------------" + LINE_BREAK);
+        sb.append(LINE_BREAK).append(LINE_BREAK).append(SINGLE_DIVIDER).append(LINE_BREAK);
         return sb.toString();
     }
 
