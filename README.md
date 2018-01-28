@@ -43,7 +43,7 @@
 ![](https://github.com/xuexiangjys/XLog/blob/master/img/4.jpg)
 
 ## 2、如何使用
-目前支持主流开发工具AndtoidStudio的使用，直接配置build.gradle，增加依赖即可.
+目前支持主流开发工具AndroidStudio的使用，直接配置build.gradle，增加依赖即可.
 
 ### 2.1、Android Studio导入方法，添加Gradle依赖
 
