@@ -20,6 +20,7 @@ package com.xuexiang.xlog.crash;
 import java.io.File;
 
 /**
+ * 崩溃处理者
  * @author xuexiang
  * @date 2018/1/28 下午11:01
  */

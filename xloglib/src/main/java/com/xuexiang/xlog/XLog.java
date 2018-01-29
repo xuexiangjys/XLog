@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * XLog全局日志打印
  * @author xuexiang
  * @date 2018/1/17 上午12:03
  */

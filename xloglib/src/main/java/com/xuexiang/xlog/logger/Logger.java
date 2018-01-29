@@ -43,6 +43,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 /**
+ * 日志打印者
  * @author xuexiang
  * @date 2018/1/16 下午9:41
  */
