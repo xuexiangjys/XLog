@@ -60,9 +60,9 @@ import static com.xuexiang.xlog.utils.FileUtils.ZIP_EXT;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Utils {
-    //    public static final String LINE_BREAK = "\r\n";// 换行符
+        public static final String LINE_BREAK = "\r\n";// 换行符
     public static final String SINGLE_DIVIDER = "------------------------------------------------------------------------------------";
-    public static final String LINE_BREAK = System.lineSeparator();// 换行符
+//    public static final String LINE_BREAK = System.lineSeparator();// 换行符
     public static final String CLASS_METHOD_LINE_FORMAT = "%s.%s()  Line:%d  (%s)\r\n\n";// 格式化日志信息
 
     private static final String TAG = "Utils";
@@ -310,7 +310,7 @@ public final class Utils {
     public static void write(@NonNull final Context context, @NonNull final String dirPath,
                              @NonNull final String fileName,
                              @NonNull final String content) {
-        sExecutorService.execute(new Runnable() {
+        sExecutorService.submit(new Runnable() {
             @Override
             public void run() {
                 BufferedSink bufferedSink = null;
