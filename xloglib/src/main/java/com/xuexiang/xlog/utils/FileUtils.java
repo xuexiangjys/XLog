@@ -264,7 +264,7 @@ public class FileUtils {
      * @return
      */
     public static String getDiskCacheDir(Context context) {
-        return isSDCardExist() ? context.getExternalCacheDir().getPath() : context.getCacheDir().getPath();
+        return isSDCardExist() && context.getExternalCacheDir() != null ? context.getExternalCacheDir().getPath() : context.getCacheDir().getPath();
     }
 
     /**
