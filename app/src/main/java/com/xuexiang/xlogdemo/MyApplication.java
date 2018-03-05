@@ -12,13 +12,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.xuexiang.xlog;
+package com.xuexiang.xlogdemo;
 
 import android.app.Application;
 
+import com.xuexiang.xlog.XLog;
 import com.xuexiang.xlog.annotation.LogLevel;
 import com.xuexiang.xlog.annotation.LogSegment;
 import com.xuexiang.xlog.crash.CrashHandler;
