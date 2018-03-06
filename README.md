@@ -117,7 +117,7 @@ https://github.com/JiongBull/jlog
 
 
 
-[xlsvg]: https://img.shields.io/badge/XLog-v1.0.1-brightgreen.svg
+[xlsvg]: https://img.shields.io/badge/XLog-v1.1.2-brightgreen.svg
 [xl]: https://github.com/xuexiangjys/XLog
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
