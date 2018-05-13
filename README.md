@@ -4,9 +4,11 @@
 一个简易的日志打印框架（支持打印策略自定义，默认提供2种策略：logcat打印和磁盘打印）
 
 ## 关于我
+
 [![github](https://img.shields.io/badge/GitHub-xuexiangjys-blue.svg)](https://github.com/xuexiangjys)   [![csdn](https://img.shields.io/badge/CSDN-xuexiangjys-green.svg)](http://blog.csdn.net/xuexiangjys)
 
 ## 特点
+
 - 支持自定义日志格式策略IFormatStrategy和打印策略ILogStrategy。
 - 提供默认的两种日志打印方式：logcat（PrettyFormatStrategy）和磁盘打印（PrettyFormatStrategy）。
 - 兼容android logcat，VERBOSE、DEBUG、INFO、WARN、ERROR和WTF全都有，一个都不能少
@@ -49,7 +51,8 @@
 
 ### 2.1、Android Studio导入方法，添加Gradle依赖
 
-先在项目根目录的 build.gradle 的 repositories 添加:
+1.先在项目根目录的 build.gradle 的 repositories 添加:
+
 ```
 allprojects {
      repositories {
@@ -59,22 +62,27 @@ allprojects {
 }
 ```
 
-然后在dependencies添加:
+2.然后在dependencies添加:
 
 ```
 dependencies {
    ...
-   implementation 'com.github.xuexiangjys:XLog:1.0.1'
-   implementation 'com.squareup.okio:okio:1.10.0'
+   implementation 'com.github.xuexiangjys:XLog:1.1.3'
 }
 ```
+
 ### 2.2、初始化
+
 在Application中初始化
+
 ```
 XLog.init(this);
 ```
+
 ### 2.3、构建Logger
+
 构建一个Logger需要一个日志格式化策略和一个日志打印策略。
+
 ```
 ILogStrategy diskLogStrategy = DiskLogStrategy.newBuilder()       //日志打印策略
         .setLogDir("xlogDemo")                                    //设置日志文件存储的根目录
@@ -93,7 +101,9 @@ Logger.newBuilder("DiskLogger")
         .build();
 CrashHandler.getInstance().setOnCrashListener(new SendEmailCrashListener()); //增加崩溃发送email的监听处理
 ```
+
 ### 2.4、日志记录
+
 ```
 UserInfo userInfo = new UserInfo().setLoginName("xuexiang").setPassword("12345678");
 String json = new Gson().toJson(userInfo);
@@ -109,7 +119,6 @@ try {
 }
 ```
 
-
 ## 特别感谢
 https://github.com/orhanobut/logger
 
@@ -123,7 +132,7 @@ https://github.com/JiongBull/jlog
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
 
-[xlsvg]: https://img.shields.io/badge/XLog-v1.1.2-brightgreen.svg
+[xlsvg]: https://img.shields.io/badge/XLog-v1.1.3-brightgreen.svg
 [xl]: https://github.com/xuexiangjys/XLog
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
