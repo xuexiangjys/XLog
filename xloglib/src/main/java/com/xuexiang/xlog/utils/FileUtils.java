@@ -34,17 +34,22 @@ import java.util.Comparator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static android.content.ContentValues.TAG;
 
 /**
- * 文件相关.
+ * <pre>
+ *     desc   : 文件相关
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:07
+ * </pre>
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
 public class FileUtils {
-    /** 压缩文件的扩展名. */
+    /**
+     * 压缩文件的扩展名.
+     */
     public static final String ZIP_EXT = ".zip";
 
     private FileUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**
@@ -131,11 +136,11 @@ public class FileUtils {
             if (isClean) {
                 boolean deleteResult = delete(sourceFile); // 压缩完毕后删除
                 if (!deleteResult) {
-                    Log.e(TAG, "delete file failed");
+                    Log.e("FileUtils", "delete file failed");
                 }
             }
         } finally {
-            IOUtils.closeQuietly(zos);
+            CloseUtils.closeQuietly(zos);
         }
     }
 
@@ -171,7 +176,7 @@ public class FileUtils {
                 }
                 zos.closeEntry();
             } finally {
-                IOUtils.closeQuietly(bis);
+                CloseUtils.closeQuietly(bis);
             }
         }
     }
@@ -252,14 +257,12 @@ public class FileUtils {
     }
 
     public static boolean isSDCardExist() {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable()) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable();
     }
 
     /**
      * 获取磁盘的缓存目录
+     *
      * @param context
      * @return
      */
@@ -269,6 +272,7 @@ public class FileUtils {
 
     /**
      * 获取磁盘的缓存目录
+     *
      * @param context
      * @return
      */

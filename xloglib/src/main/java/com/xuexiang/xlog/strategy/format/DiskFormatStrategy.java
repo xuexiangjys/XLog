@@ -32,9 +32,11 @@ import static com.xuexiang.xlog.utils.Utils.LINE_BREAK;
 import static com.xuexiang.xlog.utils.Utils.SINGLE_DIVIDER;
 
 /**
- * 磁盘日志格式化策略
- * @author xuexiang
- * @date 2018/1/15 下午11:55
+ * <pre>
+ *     desc   : 磁盘日志格式化策略
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:43
+ * </pre>
  */
 public class DiskFormatStrategy implements IFormatStrategy {
     /**

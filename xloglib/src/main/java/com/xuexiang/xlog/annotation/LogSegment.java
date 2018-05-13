@@ -31,9 +31,11 @@ import static com.xuexiang.xlog.annotation.LogSegment.TWENTY_FOUR_HOURS;
 import static com.xuexiang.xlog.annotation.LogSegment.TWO_HOURS;
 
 /**
- * 日志时间切片，用于文件日志记录
- * @author xuexiang
- * @date 2018/1/15 下午10:20
+ * <pre>
+ *     desc   : 日志时间切片，用于文件日志记录
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:40
+ * </pre>
  */
 @IntDef({ONE_HOUR, TWO_HOURS, THREE_HOURS, FOUR_HOURS, SIX_HOURS, TWELVE_HOURS, TWENTY_FOUR_HOURS})
 @Retention(RetentionPolicy.SOURCE)

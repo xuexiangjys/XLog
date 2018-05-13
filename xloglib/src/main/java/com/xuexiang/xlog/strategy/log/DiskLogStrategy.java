@@ -29,9 +29,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 磁盘打印日志策略
- * @author xuexiang
- * @date 2018/1/16 上午12:23
+ * <pre>
+ *     desc   : 磁盘打印日志策略
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:42
+ * </pre>
  */
 public class DiskLogStrategy implements ILogStrategy {
     /**

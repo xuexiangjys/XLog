@@ -30,10 +30,11 @@ import com.xuexiang.xlog.R;
 import java.io.File;
 
 /**
- * 发邮件的崩溃监听
- *
- * @author xuexiang
- * @date 2018/1/29 上午12:16
+ * <pre>
+ *     desc   : 发邮件的崩溃监听
+ *     author : xuexiang
+ *     time   : 2018/5/13 上午10:40
+ * </pre>
  */
 public class SendEmailCrashListener implements OnCrashListener {
     /**
@@ -60,6 +61,7 @@ public class SendEmailCrashListener implements OnCrashListener {
 
     /**
      * 构造方法
+     *
      * @param sendEmailAddress 邮件发送地址
      * @param copyEmailAddress 邮件抄送地址
      */
@@ -67,6 +69,7 @@ public class SendEmailCrashListener implements OnCrashListener {
         mSendEmailAddress = sendEmailAddress;
         mCopyEmailAddress = copyEmailAddress;
     }
+
     /**
      * 发生崩溃
      *
@@ -89,6 +92,7 @@ public class SendEmailCrashListener implements OnCrashListener {
 
     /**
      * 发送应用崩溃报告
+     *
      * @param context
      * @param crashHandler
      * @param throwable
@@ -131,6 +135,7 @@ public class SendEmailCrashListener implements OnCrashListener {
 
     /**
      * 发送崩溃日志邮件
+     *
      * @param context
      * @param crashHandler
      * @param crashLogFile

@@ -17,7 +17,7 @@
 
 package com.xuexiang.xlog.utils;
 
-import android.support.annotation.IntDef;
+import android.support.annotation.LongDef;
 import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
 
@@ -63,14 +63,18 @@ import static com.xuexiang.xlog.utils.TimeUtils.ZoneOffset.P1300;
 import static com.xuexiang.xlog.utils.TimeUtils.ZoneOffset.P1400;
 
 /**
- * 时间相关.
+ * <pre>
+ *     desc   : 时间相关
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:08
+ * </pre>
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
 public final class TimeUtils {
 
     public static final String LOG_LINE_TIME = "yyyy-MM-dd HH:mm:ss.SSS";
 
     private TimeUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**
@@ -181,7 +185,7 @@ public final class TimeUtils {
     /**
      * 时区偏移，N表示负，P表示正，数字表示时区，例如东八区使用P0800表示.
      */
-    @IntDef({N1200, N1100, N1000, N0900, N0800, N0700, N0600, N0500, N0430, N0400, N0330, N0300,
+    @LongDef({N1200, N1100, N1000, N0900, N0800, N0700, N0600, N0500, N0430, N0400, N0330, N0300,
             N0200, N0100, N0000, P0100, P0200, P0300, P0330, P0400, P0430, P0500, P0530, P0600,
             P0630, P0700, P0800, P0830, P0900, P0930, P1000, P1100, P1200, P1300, P1400})
     @Retention(RetentionPolicy.SOURCE)

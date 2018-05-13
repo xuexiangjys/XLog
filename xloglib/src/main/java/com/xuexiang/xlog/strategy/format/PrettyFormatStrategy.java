@@ -23,9 +23,11 @@ import com.xuexiang.xlog.strategy.log.LogcatLogStrategy;
 import com.xuexiang.xlog.utils.Utils;
 
 /**
- * 漂亮的打印格式策略
- * @author xuexiang
- * @date 2018/1/26 下午1:19
+ * <pre>
+ *     desc   : 漂亮的打印格式策略
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:43
+ * </pre>
  */
 public class PrettyFormatStrategy implements IFormatStrategy {
 
@@ -107,7 +109,6 @@ public class PrettyFormatStrategy implements IFormatStrategy {
         logChunk(level, tag, TOP_BORDER);
     }
 
-    @SuppressWarnings("StringBufferReplaceableByString")
     private void logHeaderContent(@LogLevel String level, String tag, int methodCount) {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         if (showThreadInfo) {

@@ -43,9 +43,11 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 /**
- * 日志打印者
- * @author xuexiang
- * @date 2018/1/16 下午9:41
+ * <pre>
+ *     desc   : 日志打印者 【-> format -> log】
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:50
+ * </pre>
  */
 public class Logger implements ILogger {
     /**

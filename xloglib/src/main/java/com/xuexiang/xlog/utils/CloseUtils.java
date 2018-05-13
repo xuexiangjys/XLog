@@ -17,35 +17,37 @@
 
 package com.xuexiang.xlog.utils;
 
-import android.util.Log;
-
 import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * IO相关.
+ * <pre>
+ *     desc   : IO相关
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:54
+ * </pre>
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
-public class IOUtils {
+public class CloseUtils {
 
-    private static final String TAG = "IOUtils";
-
-    private IOUtils() {
+    private CloseUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**
-     * Closes a <code>Closeable</code> unconditionally.
+     * 安静关闭 IO
      *
-     * @param closeable the objects to close, may be null or already closed
-     * @since 2.0
+     * @param closeables closeables
      */
-    public static void closeQuietly(final Closeable closeable) {
-        try {
+    public static void closeQuietly(final Closeable... closeables) {
+        if (closeables == null) return;
+        for (Closeable closeable : closeables) {
             if (closeable != null) {
-                closeable.close();
+                try {
+                    closeable.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (final IOException ioe) {
-            Log.e(TAG, ioe.getMessage());
         }
     }
 }

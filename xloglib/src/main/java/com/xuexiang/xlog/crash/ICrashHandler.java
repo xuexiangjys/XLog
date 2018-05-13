@@ -20,21 +20,23 @@ package com.xuexiang.xlog.crash;
 import java.io.File;
 
 /**
- * 崩溃处理者
- * @author xuexiang
- * @date 2018/1/28 下午11:01
+ * <pre>
+ *     desc   : 崩溃处理者
+ *     author : xuexiang
+ *     time   : 2018/5/13 上午10:41
+ * </pre>
  */
 public interface ICrashHandler {
 
     /**
-     * 是否处理完成崩溃
-     * @param isHandled
+     * 是否处理完成崩溃 【设置了这个之后，将退出崩溃处理】
+     * @param isHandled 是否已处理完毕
      * @return
      */
     ICrashHandler setIsHandledCrash(boolean isHandled);
 
     /**
-     * 是否需要重启程序
+     * 是否需要重启程序 【设置了这个之后，在退出崩溃处理之后将自动重启程序】
      * @param isNeedReopen
      * @return
      */
@@ -49,7 +51,7 @@ public interface ICrashHandler {
 
 
     /**
-     * 获取崩溃日志文件
+     * 获取记录崩溃日志的文件
      * @return
      */
     File getCrashLogFile();

@@ -32,9 +32,11 @@ import static com.xuexiang.xlog.annotation.LogLevel.WARN;
 import static com.xuexiang.xlog.annotation.LogLevel.WTF;
 
 /**
- * 日志级别
- * @author xuexiang
- * @date 2018/1/15 下午10:20
+ * <pre>
+ *     desc   : 日志级别
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:41
+ * </pre>
  */
 @StringDef({VERBOSE, DEBUG, INFO, JSON, WARN, ERROR, WTF})
 @Retention(RetentionPolicy.SOURCE)

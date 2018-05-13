@@ -20,9 +20,11 @@ package com.xuexiang.xlog.crash;
 import android.content.Context;
 
 /**
- * 崩溃监听
- * @author xuexiang
- * @date 2018/1/28 下午10:34
+ * <pre>
+ *     desc   : 崩溃监听
+ *     author : xuexiang
+ *     time   : 2018/5/13 上午10:48
+ * </pre>
  */
 public interface OnCrashListener {
 

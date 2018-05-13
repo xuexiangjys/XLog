@@ -22,9 +22,11 @@ import android.os.Looper;
 import android.widget.Toast;
 
 /**
- * 简单提示toast的崩溃处理
- * @author xuexiang
- * @date 2018/1/28 下午11:05
+ * <pre>
+ *     desc   : 简单提示toast的崩溃处理
+ *     author : xuexiang
+ *     time   : 2018/5/13 上午10:49
+ * </pre>
  */
 public class ToastCrashListener implements OnCrashListener {
     /**

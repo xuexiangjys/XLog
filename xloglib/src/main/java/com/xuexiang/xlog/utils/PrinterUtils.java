@@ -27,11 +27,16 @@ import java.io.File;
 
 
 /**
- * 打印相关.
+ * <pre>
+ *     desc   : 打印相关
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:08
+ * </pre>
  */
-public class PrinterUtils {
+public final class PrinterUtils {
 
     private PrinterUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**
@@ -49,12 +54,13 @@ public class PrinterUtils {
 
     /**
      * 日志打印输出到文件.
+     *
      * @param context
-     * @param logDir 日志文件根目录
+     * @param logDir     日志文件根目录
      * @param logPrefix  日志文件前缀
      * @param logSegment 日志时间片
      * @param zoneOffset 时区
-     * @param message 信息
+     * @param message    信息
      */
     public static void printFile(@NonNull Context context, @NonNull String logDir, String logPrefix,
                                  @LogSegment int logSegment, @TimeUtils.ZoneOffset long zoneOffset,
@@ -66,12 +72,13 @@ public class PrinterUtils {
 
     /**
      * 日志打印输出到文件.
+     *
      * @param context
-     * @param logDir 日志文件根目录
-     * @param logPrefix 日志文件前缀
+     * @param logDir     日志文件根目录
+     * @param logPrefix  日志文件前缀
      * @param zoneOffset 时区
-     * @param fmt 时间格式
-     * @param message 信息
+     * @param fmt        时间格式
+     * @param message    信息
      */
     public static File printFile(@NonNull Context context, @NonNull String logDir, String logPrefix,
                                  @TimeUtils.ZoneOffset long zoneOffset, @NonNull String fmt,

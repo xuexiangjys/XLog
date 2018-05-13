@@ -30,7 +30,9 @@ import com.xuexiang.xlog.annotation.LogLevel;
 import com.xuexiang.xlog.annotation.LogSegment;
 import com.xuexiang.xlog.logger.Logger;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,16 +40,11 @@ import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import okio.BufferedSink;
-import okio.Okio;
-import okio.Sink;
 
 import static com.xuexiang.xlog.annotation.LogLevel.DEBUG;
 import static com.xuexiang.xlog.annotation.LogLevel.ERROR;
@@ -58,11 +55,10 @@ import static com.xuexiang.xlog.annotation.LogLevel.WARN;
 import static com.xuexiang.xlog.annotation.LogLevel.WTF;
 import static com.xuexiang.xlog.utils.FileUtils.ZIP_EXT;
 
-@SuppressWarnings({"unused", "WeakerAccess"})
 public final class Utils {
-        public static final String LINE_BREAK = "\r\n";// 换行符
+    public static final String LINE_BREAK = "\r\n";// 换行符
     public static final String SINGLE_DIVIDER = "------------------------------------------------------------------------------------";
-//    public static final String LINE_BREAK = System.lineSeparator();// 换行符
+    //    public static final String LINE_BREAK = System.lineSeparator();// 换行符
     public static final String CLASS_METHOD_LINE_FORMAT = "%s.%s()  Line:%d  (%s)\r\n\n";// 格式化日志信息
 
     private static final String TAG = "Utils";
@@ -89,6 +85,7 @@ public final class Utils {
     }
 
     private Utils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**
@@ -165,7 +162,7 @@ public final class Utils {
      *
      * @param logPrefix  日志前缀
      * @param zoneOffset 时区偏移
-     * @param fmt 时间格式
+     * @param fmt        时间格式
      * @return 日志文件名
      */
     public static String getLogFileName(String logPrefix, @TimeUtils.ZoneOffset long zoneOffset, @NonNull String fmt) {
@@ -313,7 +310,7 @@ public final class Utils {
         sExecutorService.submit(new Runnable() {
             @Override
             public void run() {
-                BufferedSink bufferedSink = null;
+                BufferedWriter bw = null;
                 try {
                     if (FileUtils.createDir(dirPath)) {
                         String outContent = content;
@@ -321,14 +318,13 @@ public final class Utils {
                         if (!FileUtils.isExist(file)) {
                             outContent = getDevicesInfo(context) + outContent;
                         }
-                        Sink sink = Okio.appendingSink(file);
-                        bufferedSink = Okio.buffer(sink);
-                        bufferedSink.writeUtf8(outContent);
+                        bw = new BufferedWriter(new FileWriter(file, true));
+                        bw.write(outContent);
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "写日志异常", e);
                 } finally {
-                    IOUtils.closeQuietly(bufferedSink);
+                    CloseUtils.closeQuietly(bw);
                 }
             }
         });

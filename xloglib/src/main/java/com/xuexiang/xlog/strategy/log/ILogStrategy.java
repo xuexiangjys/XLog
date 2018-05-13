@@ -20,9 +20,11 @@ package com.xuexiang.xlog.strategy.log;
 import com.xuexiang.xlog.annotation.LogLevel;
 
 /**
- * 日志打印策略实现接口
- * @author xuexiang
- * @date 2018/1/15 下午11:08
+ * <pre>
+ *     desc   : 日志打印策略实现接口
+ *     author : xuexiang
+ *     time   : 2018/5/13 下午10:42
+ * </pre>
  */
 public interface ILogStrategy {
 
