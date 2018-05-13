@@ -65,10 +65,6 @@ public class PrettyFormatStrategy implements IFormatStrategy {
         tag = builder.tag;
     }
 
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
     /**
      * 格式化日志内容
      *
@@ -178,12 +174,30 @@ public class PrettyFormatStrategy implements IFormatStrategy {
         return this.tag;
     }
 
+    public static Builder newBuilder() {
+        return new Builder();
+    }
 
     public static class Builder {
+        /**
+         * 显示的方法数
+         */
         int methodCount = 2;
+        /**
+         * 方法的偏移
+         */
         int methodOffset = 0;
+        /**
+         * 是否显示线程信息
+         */
         boolean showThreadInfo = true;
+        /**
+         * 日志打印策略
+         */
         ILogStrategy logStrategy;
+        /**
+         * 标签
+         */
         String tag = "pretty";
 
         private Builder() {

@@ -103,15 +103,15 @@ public class SendEmailCrashListener implements OnCrashListener {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_info)
-                .setTitle(R.string.title_app_crash)
-                .setMessage(R.string.tip_crash_msg)
-                .setPositiveButton(R.string.lab_submit_report,
+                .setTitle(R.string.xlog_title_app_crash)
+                .setMessage(R.string.xlog_tip_crash_msg)
+                .setPositiveButton(R.string.xlog_lab_submit_report,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 sendCrashReportEmail(context, crashHandler, crashLogFile, crashReport);
                             }
                         })
-                .setNeutralButton(R.string.lab_show_detail, new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.xlog_lab_show_detail, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -153,19 +153,19 @@ public class SendEmailCrashListener implements OnCrashListener {
             intent.putExtra(Intent.EXTRA_BCC, ccs);  //密送者
 
             intent.putExtra(Intent.EXTRA_SUBJECT,
-                    context.getString(R.string.title_crash_report_email));
+                    context.getString(R.string.xlog_title_crash_report_email));
             if (crashLogFile != null) {
                 intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(crashLogFile));
                 intent.putExtra(Intent.EXTRA_TEXT,
-                        context.getString(R.string.content_crash_report_email));
+                        context.getString(R.string.xlog_content_crash_report_email));
             } else {
                 intent.putExtra(Intent.EXTRA_TEXT,
-                        context.getString(R.string.content_crash_report_email)
+                        context.getString(R.string.xlog_content_crash_report_email)
                                 + crashReport);
             }
             intent.setType("text/plain");
             intent.setType("message/rfc882");
-            Intent.createChooser(intent, context.getString(R.string.title_please_choose_email_client));
+            Intent.createChooser(intent, context.getString(R.string.xlog_title_please_choose_email_client));
             context.startActivity(intent);
 
         } catch (Exception e) {
@@ -187,9 +187,9 @@ public class SendEmailCrashListener implements OnCrashListener {
     private void showCrashDetail(Context context, String crashLogReport, final ICrashHandler crashHandler) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setIcon(android.R.drawable.ic_dialog_info)
-                .setTitle(R.string.title_crash_detail)
+                .setTitle(R.string.xlog_title_crash_detail)
                 .setMessage(crashLogReport)
-                .setPositiveButton(R.string.lab_submit, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.xlog_lab_submit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // 退出

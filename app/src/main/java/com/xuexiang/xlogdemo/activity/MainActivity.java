@@ -12,30 +12,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.xuexiang.xlog.strategy.log;
+package com.xuexiang.xlogdemo.activity;
 
-import com.xuexiang.xlog.utils.PrinterUtils;
+import android.os.Bundle;
 
-/**
- * <pre>
- *     desc   : Logcat日志策略
- *     author : xuexiang
- *     time   : 2018/5/13 下午10:44
- * </pre>
- */
-public class LogcatLogStrategy implements ILogStrategy {
-    /**
-     * 打印日志
-     *
-     * @param level
-     * @param tag
-     * @param message
-     */
+import com.xuexiang.xlogdemo.fragment.MainFragment;
+import com.xuexiang.xpage.base.BaseActivity;
+
+public class MainActivity extends BaseActivity {
+
     @Override
-    public void log(String level, String tag, String message) {
-        PrinterUtils.printConsole(level, tag, message);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        openPage(MainFragment.class);
     }
 }

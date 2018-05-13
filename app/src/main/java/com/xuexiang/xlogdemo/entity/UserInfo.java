@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xuexiang.xlogdemo;
+package com.xuexiang.xlogdemo.entity;
 
 /**
  * @author xuexiang

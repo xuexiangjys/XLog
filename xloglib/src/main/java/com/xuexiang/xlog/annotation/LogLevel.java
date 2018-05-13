@@ -38,14 +38,15 @@ import static com.xuexiang.xlog.annotation.LogLevel.WTF;
  *     time   : 2018/5/13 下午10:41
  * </pre>
  */
-@StringDef({VERBOSE, DEBUG, INFO, JSON, WARN, ERROR, WTF})
+@StringDef({VERBOSE, DEBUG, JSON, INFO, WARN, ERROR, WTF})
 @Retention(RetentionPolicy.SOURCE)
 public @interface LogLevel {
     String VERBOSE = "VERBOSE";
     String DEBUG = "DEBUG";
-    String INFO = "INFO";
     String JSON = "JSON";
+    String INFO = "INFO";
     String WARN = "WARN";
     String ERROR = "ERROR";
     String WTF = "WTF";
+
 }

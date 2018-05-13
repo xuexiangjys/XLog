@@ -55,10 +55,14 @@ public class Logger implements ILogger {
      */
     private static final int JSON_INDENT = 2;
 
-    /** 标识. */
+    /**
+     * 标识.
+     */
     private String mName;
 
-    /** DEBUG模式. */
+    /**
+     * DEBUG模式.
+     */
     private boolean mDebug;
 
     /**
@@ -73,6 +77,7 @@ public class Logger implements ILogger {
 
     /**
      * 构造方法
+     *
      * @param builder
      */
     public Logger(Builder builder) {
@@ -85,7 +90,7 @@ public class Logger implements ILogger {
     /**
      * 设置tag标签
      *
-     * @param tag
+     * @param tag 标签
      * @return
      */
     @Override
@@ -99,7 +104,7 @@ public class Logger implements ILogger {
     }
 
     /**
-     * 获取TAG。
+     * 获取TAG
      *
      * @param element 堆栈元素
      * @return TAG
@@ -168,7 +173,7 @@ public class Logger implements ILogger {
     /**
      * 格式化json内容并打印
      *
-     * @param json
+     * @param json  json内容
      */
     @Override
     public void json(String json) {
@@ -199,7 +204,7 @@ public class Logger implements ILogger {
     /**
      * 格式化xml内容并打印
      *
-     * @param xml
+     * @param xml xml内容
      */
     @Override
     public void xml(String xml) {
@@ -239,12 +244,12 @@ public class Logger implements ILogger {
     }
 
     /**
-     * 日志打印
+     * 日志打印（具体的日志打印方法）
      *
-     * @param level
-     * @param tag
-     * @param message
-     * @param throwable
+     * @param level     日志等级
+     * @param tag       标签
+     * @param message   信息
+     * @param throwable 错误信息
      */
     @Override
     public void log(@LogLevel String level, String tag, String message, Throwable throwable) {
@@ -272,6 +277,7 @@ public class Logger implements ILogger {
 
     /**
      * 设置日志的名字
+     *
      * @param name
      * @return
      */
@@ -286,7 +292,8 @@ public class Logger implements ILogger {
 
     /**
      * 设置日志格式化策略
-     * @param strategy
+     *
+     * @param strategy 日志格式化策略
      * @return
      */
     public Logger setFormatStrategy(IFormatStrategy strategy) {
@@ -296,6 +303,7 @@ public class Logger implements ILogger {
 
     /**
      * 创建日志者
+     *
      * @param name
      * @return
      */
@@ -304,10 +312,14 @@ public class Logger implements ILogger {
     }
 
     public static class Builder {
-        /** 标识. */
+        /**
+         * 标识.
+         */
         String name;
 
-        /** DEBUG模式. */
+        /**
+         * DEBUG模式.
+         */
         boolean debug;
 
         /**
@@ -367,6 +379,10 @@ public class Logger implements ILogger {
             Logger logger = new Logger(this);
             XLog.get().addLogger(logger);
             return logger;
+        }
+
+        public Logger buildNotAddToXLog() {
+            return new Logger(this);
         }
     }
 }

@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">XLogLib</string>
-    <string name="title_app_crash">应用程序错误</string>
-    <string name="tip_crash_msg">很抱歉，应用程序出现错误，即将退出。 请选择邮件的方式将此错误报告提交给我，我会尽快修复这个问题，谢谢！</string>
-    <string name="lab_submit_report">提交报告</string>
-    <string name="lab_show_detail">查看详情</string>
-    <string name="title_crash_detail">崩溃详情</string>
-    <string name="lab_submit">确定</string>
-    <string name="title_crash_report_email">Android客户端 - 错误报告</string>
-    <string name="content_crash_report_email">请将此错误报告发送给我，以便我尽快修复此问题，谢谢合作！</string>
-    <string name="title_please_choose_email_client">Choose Email Client</string>
+    <string name="xlog_title_app_crash">应用程序错误</string>
+    <string name="xlog_tip_crash_msg">很抱歉，应用程序出现错误，即将退出。 请选择邮件的方式将此错误报告提交给我，我会尽快修复这个问题，谢谢！</string>
+    <string name="xlog_lab_submit_report">提交报告</string>
+    <string name="xlog_lab_show_detail">查看详情</string>
+    <string name="xlog_title_crash_detail">崩溃详情</string>
+    <string name="xlog_lab_submit">确定</string>
+    <string name="xlog_title_crash_report_email">Android客户端 - 错误报告</string>
+    <string name="xlog_content_crash_report_email">请将此错误报告发送给我，以便我尽快修复此问题，谢谢合作！</string>
+    <string name="xlog_title_please_choose_email_client">Choose Email Client</string>
 </resources>

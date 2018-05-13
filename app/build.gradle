@@ -1,35 +1,64 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.xuexiang.xlogdemo"
-        minSdkVersion 22
-        targetSdkVersion 26
+        minSdkVersion 19
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    if (isNeedPackage.toBoolean()) {
+        signingConfigs {
+            release {
+                storeFile file(app_release.storeFile)
+                storePassword app_release.storePassword
+                keyAlias app_release.keyAlias
+                keyPassword app_release.keyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (isNeedPackage.toBoolean()) {
+                signingConfig signingConfigs.release
+            }
         }
+    }
+
+    if (isNeedPackage.toBoolean()) {
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                if (variant.buildType.name.equals('release')) {
+                    outputFileName = "xLogdemo.apk"
+                }
+            }
+        }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation deps.support.app_compat
     implementation project(':xloglib')
 
-//    implementation 'com.github.xuexiangjys:XLog:1.0.1'
-//    implementation 'com.squareup.okio:okio:1.10.0'
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.2'
+    //XPage
+    implementation 'com.github.xuexiangjys.XPage:xpage-lib:2.1.8'
+    annotationProcessor 'com.github.xuexiangjys.XPage:xpage-compiler:2.1.8'
+    //butterknife的sdk
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //Gson序列化反序列化的依赖包
-    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation deps.gson
 }

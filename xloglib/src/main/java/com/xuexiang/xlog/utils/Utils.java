@@ -276,10 +276,10 @@ public final class Utils {
             case DEBUG:
                 Log.d(tag, sub);
                 break;
-            case INFO:
-                Log.i(tag, sub);
-                break;
             case JSON:
+                Log.d(tag, sub);
+                break;
+            case INFO:
                 Log.i(tag, sub);
                 break;
             case WARN:
