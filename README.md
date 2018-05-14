@@ -7,7 +7,7 @@
 
 [![github](https://img.shields.io/badge/GitHub-xuexiangjys-blue.svg)](https://github.com/xuexiangjys)   [![csdn](https://img.shields.io/badge/CSDN-xuexiangjys-green.svg)](http://blog.csdn.net/xuexiangjys)
 
-## 特点
+## 特征
 
 * 支持自定义日志格式策略IFormatStrategy和打印策略ILogStrategy。
 * 提供默认的两种日志打印方式：logcat（PrettyFormatStrategy）和磁盘打印（PrettyFormatStrategy）。
