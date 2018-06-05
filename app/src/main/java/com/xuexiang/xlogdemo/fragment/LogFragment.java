@@ -21,7 +21,7 @@ import com.xuexiang.xlog.XLog;
 import com.xuexiang.xlog.logger.LoggerFactory;
 import com.xuexiang.xlogdemo.entity.UserInfo;
 import com.xuexiang.xpage.annotation.Page;
-import com.xuexiang.xpage.base.SimpleListFragment;
+import com.xuexiang.xpage.base.XPageSimpleListFragment;
 import com.xuexiang.xutil.common.logger.ILogger;
 import com.xuexiang.xutil.common.logger.Logger;
 import com.xuexiang.xutil.resource.ResourceUtils;
@@ -36,7 +36,7 @@ import java.util.List;
  * </pre>
  */
 @Page(name = "日志记录")
-public class LogFragment extends SimpleListFragment {
+public class LogFragment extends XPageSimpleListFragment {
     String json;
 
     @Override

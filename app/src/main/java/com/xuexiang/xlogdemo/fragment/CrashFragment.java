@@ -20,7 +20,8 @@ import com.xuexiang.xlog.crash.CrashHandler;
 import com.xuexiang.xlog.crash.SendEmailCrashListener;
 import com.xuexiang.xlog.crash.ToastCrashListener;
 import com.xuexiang.xpage.annotation.Page;
-import com.xuexiang.xpage.base.SimpleListFragment;
+import com.xuexiang.xpage.base.XPageSimpleListFragment;
+import com.xuexiang.xutil.system.PermissionUtils;
 
 import java.util.List;
 
@@ -32,7 +33,8 @@ import java.util.List;
  * </pre>
  */
 @Page(name = "程序崩溃处理")
-public class CrashFragment extends SimpleListFragment {
+public class CrashFragment extends XPageSimpleListFragment {
+
     /**
      * 初始化例子
      *
@@ -44,6 +46,12 @@ public class CrashFragment extends SimpleListFragment {
         lists.add("崩溃处理：简单的toast提示 + 程序自动启动。");
         lists.add("崩溃处理：发送崩溃日志邮件。");
         return lists;
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        PermissionUtils.requestSystemAlertWindow(getActivity());
     }
 
     /**

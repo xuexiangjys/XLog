@@ -27,7 +27,7 @@ import java.io.IOException;
  *     time   : 2018/5/13 下午10:54
  * </pre>
  */
-public class CloseUtils {
+public final class CloseUtils {
 
     private CloseUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");

@@ -41,6 +41,10 @@ public class DiskLogStrategy implements ILogStrategy {
      */
     private String mLogDir;
     /**
+     * logDir设置的是否是绝对路径【默认是false：相对路径】
+     */
+    private boolean mAbsolutePath;
+    /**
      * 日志文件的前缀.
      */
     private String mLogPrefix;
@@ -61,6 +65,7 @@ public class DiskLogStrategy implements ILogStrategy {
 
     public DiskLogStrategy(Builder builder) {
         mLogDir = builder.logDir;
+        mAbsolutePath = builder.absolutePath;
         mLogPrefix = builder.logPrefix;
         mLogSegment = builder.logSegment;
         mZoneOffset = builder.zoneOffset;
@@ -78,7 +83,7 @@ public class DiskLogStrategy implements ILogStrategy {
     public void log(@LogLevel String level, String tag, String message) {
         if (mLogLevels.contains(level)) {
             synchronized (DiskLogStrategy.class) {
-                PrinterUtils.printFile(XLog.getContext(), mLogDir, mLogPrefix, mLogSegment, mZoneOffset, message);
+                PrinterUtils.printFile(XLog.getContext(), mLogDir, mAbsolutePath, mLogPrefix, mLogSegment, mZoneOffset, message);
             }
         }
     }
@@ -92,6 +97,11 @@ public class DiskLogStrategy implements ILogStrategy {
          * 日志保存的目录.
          */
         String logDir;
+        /**
+         * logDir设置的是否是绝对路径【默认是相对路径】
+         */
+        boolean absolutePath;
+
         /**
          * 日志文件的前缀.
          */
@@ -114,6 +124,7 @@ public class DiskLogStrategy implements ILogStrategy {
 
         private Builder() {
             logDir = "xlog";
+            absolutePath = false;
             logPrefix = "";
             logSegment = LogSegment.TWENTY_FOUR_HOURS;
             zoneOffset = TimeUtils.ZoneOffset.P0800;
@@ -169,6 +180,15 @@ public class DiskLogStrategy implements ILogStrategy {
 
         public Builder setLogLevels(@LogLevel String... logLevels) {
             setLogLevels(Arrays.asList(logLevels));
+            return this;
+        }
+
+        public boolean isAbsolutePath() {
+            return absolutePath;
+        }
+
+        public Builder setAbsolutePath(boolean absolutePath) {
+            this.absolutePath = absolutePath;
             return this;
         }
 

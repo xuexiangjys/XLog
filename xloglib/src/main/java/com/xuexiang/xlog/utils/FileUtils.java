@@ -18,10 +18,15 @@
 package com.xuexiang.xlog.utils;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.xuexiang.xlog.XLog;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -42,7 +47,7 @@ import java.util.zip.ZipOutputStream;
  *     time   : 2018/5/13 下午10:07
  * </pre>
  */
-public class FileUtils {
+public final class FileUtils {
     /**
      * 压缩文件的扩展名.
      */
@@ -278,5 +283,21 @@ public class FileUtils {
      */
     public static String getDiskCacheDir(Context context, String fileDir) {
         return getDiskCacheDir(context) + File.separator + fileDir;
+    }
+
+    /**
+     * Return a content URI for a given file.
+     *
+     * @param file The file.
+     * @return a content URI for a given file
+     */
+    public static Uri getUriForFile(final File file) {
+        if (file == null) return null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            String authority = XLog.getContext().getPackageName() + ".xlog.provider";
+            return FileProvider.getUriForFile(XLog.getContext(), authority, file);
+        } else {
+            return Uri.fromFile(file);
+        }
     }
 }

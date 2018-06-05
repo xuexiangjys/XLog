@@ -21,11 +21,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Looper;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.xuexiang.xlog.R;
+import com.xuexiang.xlog.utils.FileUtils;
 
 import java.io.File;
 
@@ -155,7 +156,7 @@ public class SendEmailCrashListener implements OnCrashListener {
             intent.putExtra(Intent.EXTRA_SUBJECT,
                     context.getString(R.string.xlog_title_crash_report_email));
             if (crashLogFile != null) {
-                intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(crashLogFile));
+                intent.putExtra(Intent.EXTRA_STREAM, FileUtils.getUriForFile(crashLogFile));
                 intent.putExtra(Intent.EXTRA_TEXT,
                         context.getString(R.string.xlog_content_crash_report_email));
             } else {
@@ -170,6 +171,7 @@ public class SendEmailCrashListener implements OnCrashListener {
 
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(context, "当前设备无邮件应用，无法发送！", Toast.LENGTH_LONG).show();
         } finally {
             // 退出
             crashHandler.setIsNeedReopen(false); //禁止重启

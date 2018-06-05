@@ -56,19 +56,21 @@ public final class PrinterUtils {
      * 日志打印输出到文件.
      *
      * @param context
-     * @param logDir     日志文件根目录
-     * @param logPrefix  日志文件前缀
-     * @param logSegment 日志时间片
-     * @param zoneOffset 时区
-     * @param message    信息
+     * @param logDir         日志文件根目录
+     * @param isAbsolutePath 设置的根目录是否是绝对路径
+     * @param logPrefix      日志文件前缀
+     * @param logSegment     日志时间片
+     * @param zoneOffset     时区
+     * @param message        信息
      */
-    public static void printFile(@NonNull Context context, @NonNull String logDir, String logPrefix,
+    public static void printFile(@NonNull Context context, @NonNull String logDir, boolean isAbsolutePath, String logPrefix,
                                  @LogSegment int logSegment, @TimeUtils.ZoneOffset long zoneOffset,
                                  @NonNull String message) {
-        String dirPath = FileUtils.getDiskCacheDir(context, logDir);
+        String dirPath = isAbsolutePath ? logDir : FileUtils.getDiskCacheDir(context, logDir);
         String fileName = Utils.getLogFileName(logPrefix, logSegment, zoneOffset);
         Utils.write(context, dirPath, fileName, message);
     }
+
 
     /**
      * 日志打印输出到文件.
