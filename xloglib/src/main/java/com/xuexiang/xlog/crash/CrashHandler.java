@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.xuexiang.xlog.utils.FileUtils;
 import com.xuexiang.xlog.utils.PrinterUtils;
 import com.xuexiang.xlog.utils.TimeUtils;
 import com.xuexiang.xlog.utils.Utils;
@@ -73,7 +74,12 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
     private String mCrashLogDir;
 
     /**
-     * 崩溃日志保存的目录.
+     * mCrashLogDir设置的是否是绝对路径【默认是false：相对路径】
+     */
+    private boolean mAbsolutePath;
+
+    /**
+     * 崩溃日志保存的文件前缀.
      */
     private String mCrashLogPrefix;
 
@@ -84,7 +90,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
     private long mZoneOffset;
 
     /**
-     * 时间格式.
+     * 日志的时间格式.默认格式【yyyy-MM-dd__HH-mm-ss】
      */
     private String mTimeFormat;
 
@@ -102,6 +108,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
         mOnCrashListener = new ToastCrashListener();
 
         mCrashLogDir = DEFAULT_CRASH_LOG_FLAG;
+        mAbsolutePath = false;
         mCrashLogPrefix = DEFAULT_CRASH_LOG_FLAG;
 
         mZoneOffset = TimeUtils.ZoneOffset.P0800;
@@ -174,21 +181,56 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
         return this;
     }
 
+    /**
+     * 设置崩溃日志保存的目录.
+     *
+     * @param crashLogDir 崩溃日志保存的目录
+     * @return
+     */
     public CrashHandler setCrashLogDir(String crashLogDir) {
         mCrashLogDir = crashLogDir;
         return this;
     }
 
+    /**
+     * 设置崩溃日志的目录是否是绝对路径.
+     *
+     * @param absolutePath 崩溃日志的目录是否是绝对路径
+     * @return
+     */
+    public CrashHandler setAbsolutePath(boolean absolutePath) {
+        mAbsolutePath = absolutePath;
+        return this;
+    }
+
+    /**
+     * 设置崩溃日志保存的文件前缀.
+     *
+     * @param crashLogPrefix 崩溃日志保存的文件前缀
+     * @return
+     */
     public CrashHandler setCrashLogPrefix(String crashLogPrefix) {
         mCrashLogPrefix = crashLogPrefix;
         return this;
     }
 
+    /**
+     * 设置时区偏移时间.
+     *
+     * @param zoneOffset 时区偏移时间
+     * @return
+     */
     public CrashHandler setZoneOffset(long zoneOffset) {
         mZoneOffset = zoneOffset;
         return this;
     }
 
+    /**
+     * 设置日志的时间格式.
+     *
+     * @param timeFormat 日志的时间格式，默认格式【yyyy-MM-dd__HH-mm-ss】
+     * @return
+     */
     public CrashHandler setTimeFormat(String timeFormat) {
         mTimeFormat = timeFormat;
         return this;
@@ -253,7 +295,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @return 崩溃日志文件
      */
     private File saveCrashInfo(Throwable throwable) {
-        return PrinterUtils.printFile(mContext, mCrashLogDir, mCrashLogPrefix, mZoneOffset, mTimeFormat, getCrashLogInfo(throwable));
+        return PrinterUtils.printFile(getCrashLogDirPath(), mCrashLogPrefix, mZoneOffset, mTimeFormat, getCrashLogInfo(throwable));
     }
 
     /**
@@ -264,7 +306,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      */
     @Override
     public String getCrashReport(Throwable throwable) {
-        return Utils.getDevicesInfo(mContext) + getCrashLogInfo(throwable);
+        return Utils.getDeviceInfos(mContext) + getCrashLogInfo(throwable);
     }
 
     @Override
@@ -280,6 +322,19 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      */
     private String getCrashLogInfo(Throwable throwable) {
         return Log.getStackTraceString(throwable);
+    }
+
+    /**
+     * 获得崩溃日志的根目录路径
+     *
+     * @return
+     */
+    public String getCrashLogDirPath() {
+        return mAbsolutePath ? mCrashLogDir : FileUtils.getDiskCacheDir(mContext, mCrashLogDir);
+    }
+
+    public String getCrashLogPrefix() {
+        return mCrashLogPrefix;
     }
 
     /**

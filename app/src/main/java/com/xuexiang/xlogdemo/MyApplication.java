@@ -19,6 +19,7 @@ package com.xuexiang.xlogdemo;
 import android.app.Application;
 import android.content.Context;
 
+import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xlog.XLog;
 import com.xuexiang.xlog.annotation.LogLevel;
 import com.xuexiang.xlog.annotation.LogSegment;
@@ -86,6 +87,7 @@ public class MyApplication extends Application {
     private void initLibs() {
         XUtil.init(this);
         XUtil.debug(true);
+        XAOP.init(this);
         PageConfig.getInstance().setPageConfiguration(new PageConfiguration() { //页面注册
             @Override
             public List<PageInfo> registerPages(Context context) {

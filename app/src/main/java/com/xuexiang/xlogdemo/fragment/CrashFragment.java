@@ -16,6 +16,10 @@
 
 package com.xuexiang.xlogdemo.fragment;
 
+import android.os.Environment;
+
+import com.xuexiang.xaop.annotation.Permission;
+import com.xuexiang.xaop.consts.PermissionConsts;
 import com.xuexiang.xlog.crash.CrashHandler;
 import com.xuexiang.xlog.crash.SendEmailCrashListener;
 import com.xuexiang.xlog.crash.ToastCrashListener;
@@ -35,6 +39,7 @@ import java.util.List;
 @Page(name = "程序崩溃处理")
 public class CrashFragment extends XPageSimpleListFragment {
 
+    private final static String CRASH_PATH = Environment.getExternalStorageDirectory() + "/xlog/crash_logs/";
     /**
      * 初始化例子
      *
@@ -45,6 +50,7 @@ public class CrashFragment extends XPageSimpleListFragment {
     protected List<String> initSimpleData(List<String> lists) {
         lists.add("崩溃处理：简单的toast提示 + 程序自动启动。");
         lists.add("崩溃处理：发送崩溃日志邮件。");
+        lists.add("设置崩溃日志输出根目录为绝对路径：" + CRASH_PATH);
         return lists;
     }
 
@@ -64,14 +70,26 @@ public class CrashFragment extends XPageSimpleListFragment {
         switch(position) {
             case 0:
                 CrashHandler.getInstance().setOnCrashListener(new ToastCrashListener());
+                crash();
                 break;
             case 1:
                 CrashHandler.getInstance().setOnCrashListener(new SendEmailCrashListener());
+                crash();
+                break;
+            case 2:
+                setAbsolutePath();
                 break;
             default:
                 break;
         }
-        crash();
+    }
+
+    /**
+     * 设置崩溃日志输出根目录为绝对路径，路径为外部存储需要申请权限
+     */
+    @Permission(PermissionConsts.STORAGE)
+    public void setAbsolutePath() {
+        CrashHandler.getInstance().setAbsolutePath(true).setCrashLogDir(CRASH_PATH);
     }
 
 

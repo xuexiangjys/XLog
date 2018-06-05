@@ -17,7 +17,6 @@
 
 package com.xuexiang.xlog.utils;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.xuexiang.xlog.annotation.LogLevel;
@@ -53,42 +52,37 @@ public final class PrinterUtils {
 
 
     /**
-     * 日志打印输出到文件.
+     * 日志打印输出到文件.【输出普通日志使用】
      *
-     * @param context
-     * @param logDir         日志文件根目录
-     * @param isAbsolutePath 设置的根目录是否是绝对路径
-     * @param logPrefix      日志文件前缀
-     * @param logSegment     日志时间片
-     * @param zoneOffset     时区
-     * @param message        信息
+     * @param logDirPath 日志文件根目录路径
+     * @param logPrefix  日志文件前缀
+     * @param logSegment 日志时间片
+     * @param zoneOffset 时区
+     * @param message    信息
      */
-    public static void printFile(@NonNull Context context, @NonNull String logDir, boolean isAbsolutePath, String logPrefix,
+    public static void printFile(@NonNull String logDirPath, String logPrefix,
                                  @LogSegment int logSegment, @TimeUtils.ZoneOffset long zoneOffset,
                                  @NonNull String message) {
-        String dirPath = isAbsolutePath ? logDir : FileUtils.getDiskCacheDir(context, logDir);
         String fileName = Utils.getLogFileName(logPrefix, logSegment, zoneOffset);
-        Utils.write(context, dirPath, fileName, message);
+        Utils.write(logDirPath, fileName, message);
     }
 
 
     /**
-     * 日志打印输出到文件.
+     * 日志打印输出到文件.【输出崩溃日志使用】
      *
-     * @param context
-     * @param logDir     日志文件根目录
+     * @param logDirPath 日志文件根目录路径
      * @param logPrefix  日志文件前缀
      * @param zoneOffset 时区
      * @param fmt        时间格式
      * @param message    信息
      */
-    public static File printFile(@NonNull Context context, @NonNull String logDir, String logPrefix,
+    public static File printFile(@NonNull String logDirPath, String logPrefix,
                                  @TimeUtils.ZoneOffset long zoneOffset, @NonNull String fmt,
                                  @NonNull String message) {
-        String dirPath = FileUtils.getDiskCacheDir(context, logDir);
         String fileName = Utils.getLogFileName(logPrefix, zoneOffset, fmt);
-        Utils.write(context, dirPath, fileName, message);
-        return new File(dirPath, fileName);
+        Utils.write(logDirPath, fileName, message);
+        return new File(logDirPath, fileName);
     }
 
 }

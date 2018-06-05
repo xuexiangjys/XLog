@@ -21,6 +21,7 @@ package com.xuexiang.xlog.strategy.log;
 import com.xuexiang.xlog.XLog;
 import com.xuexiang.xlog.annotation.LogLevel;
 import com.xuexiang.xlog.annotation.LogSegment;
+import com.xuexiang.xlog.utils.FileUtils;
 import com.xuexiang.xlog.utils.PrinterUtils;
 import com.xuexiang.xlog.utils.TimeUtils;
 
@@ -83,9 +84,17 @@ public class DiskLogStrategy implements ILogStrategy {
     public void log(@LogLevel String level, String tag, String message) {
         if (mLogLevels.contains(level)) {
             synchronized (DiskLogStrategy.class) {
-                PrinterUtils.printFile(XLog.getContext(), mLogDir, mAbsolutePath, mLogPrefix, mLogSegment, mZoneOffset, message);
+                PrinterUtils.printFile(getLogDirPath(), mLogPrefix, mLogSegment, mZoneOffset, message);
             }
         }
+    }
+
+    /**
+     * 获取日志文件根目录的路径
+     * @return
+     */
+    public String getLogDirPath() {
+        return mAbsolutePath ? mLogDir : FileUtils.getDiskCacheDir(XLog.getContext(), mLogDir);
     }
 
     public static Builder newBuilder() {

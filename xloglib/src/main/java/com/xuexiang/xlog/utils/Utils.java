@@ -299,12 +299,11 @@ public final class Utils {
     /**
      * 把文本写入文件中.
      *
-     * @param context  Context
      * @param dirPath  目录路径
      * @param fileName 文件名
      * @param content  待写内容
      */
-    public static void write(@NonNull final Context context, @NonNull final String dirPath,
+    public static void write(@NonNull final String dirPath,
                              @NonNull final String fileName,
                              @NonNull final String content) {
         sExecutorService.submit(new Runnable() {
@@ -316,7 +315,7 @@ public final class Utils {
                         String outContent = content;
                         File file = new File(dirPath, fileName);
                         if (!FileUtils.isExist(file)) {
-                            outContent = getDevicesInfo(context) + outContent;
+                            outContent = getDeviceInfos() + outContent;
                         }
                         bw = new BufferedWriter(new FileWriter(file, true));
                         bw.write(outContent);
@@ -331,12 +330,21 @@ public final class Utils {
     }
 
     /**
-     * 生成系统相关的信息.
+     * 生成设备相关的信息.
+     *
+     * @return
+     */
+    public static String getDeviceInfos() {
+        return getDeviceInfos(XLog.getContext());
+    }
+
+    /**
+     * 生成设备相关的信息.
      *
      * @param context
      * @return
      */
-    public static String getDevicesInfo(@NonNull Context context) {
+    public static String getDeviceInfos(@NonNull Context context) {
         Map<String, String> logInfo = new TreeMap<>();
         try {
             // 获得包管理器
