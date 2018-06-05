@@ -69,7 +69,7 @@ allprojects {
 ```
 dependencies {
    ...
-   implementation 'com.github.xuexiangjys:XLog:1.1.3'
+   implementation 'com.github.xuexiangjys:XLog:1.1.4'
 }
 ```
 
@@ -136,6 +136,8 @@ Logger.newBuilder("DiskLogger")
 
 * getSimpleDiskFormatStrategy： 获取简化的磁盘打印的格式策略
 
+* getDiskLogger： 获取磁盘打印的logger
+
 * getSimpleDiskLogger： 获取简化的磁盘打印的logger
 
 下面是使用`LoggerFactory`构建的一个磁盘打印Logger：
@@ -145,6 +147,15 @@ DiskLogStrategy diskLogStrategy = LoggerFactory.getDiskLogStrategy(
         "xlogDemo", "xlog", LogLevel.ERROR, LogLevel.DEBUG
 );
 LoggerFactory.getSimpleDiskLogger("DiskLogger", diskLogStrategy, 0);
+```
+
+如果需要构建一个日志目录为外部存储的绝对路径的磁盘打印Logger，可参见以下代码：
+
+```
+@Permission(PermissionConsts.STORAGE)
+public void setDebugLogAbsolutePath() {  //由于设置的是外部自定义的目录，在Android6.0上需要动态申请存储权限
+    LoggerFactory.getDiskLogger("DEBUG_LOGGER", Environment.getExternalStorageDirectory() + "/xlog/logs/debug_logs", true, "debug_log_", 0, LogLevel.DEBUG);
+}
 ```
 
 ### 2.4、日志记录
@@ -196,7 +207,7 @@ void log(@LogLevel String level, String tag, String message, Throwable throwable
 
 ### 2.6、程序崩溃Crash处理
 
-目前提供两种默认的Crash处理：
+1.目前提供两种默认的Crash处理：
 
 * ToastCrashListener：简单的toast提示 + 程序自动启动。
 
@@ -208,6 +219,18 @@ CrashHandler.getInstance().setOnCrashListener(new SendEmailCrashListener());
 ```
 
 当然，你也可以实现你自己的崩溃Crash处理，只需要实现OnCrashListener接口即可。
+
+2.设置崩溃日志的输出根目录为外部绝对路径【默认的存储目录地址：/storage/emulated/0/Android/data/com.xxx.xxx/cache/crash_log】
+
+```
+/**
+ * 设置崩溃日志输出根目录为绝对路径，路径为外部存储需要申请权限
+ */
+@Permission(PermissionConsts.STORAGE)
+public void setAbsolutePath() {
+    CrashHandler.getInstance().setAbsolutePath(true).setCrashLogDir(Environment.getExternalStorageDirectory() + "/xlog/crash_logs/);
+}
+```
 
 
 ## 特别感谢
@@ -224,7 +247,7 @@ https://github.com/JiongBull/jlog
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
 
-[xlsvg]: https://img.shields.io/badge/XLog-v1.1.3-brightgreen.svg
+[xlsvg]: https://img.shields.io/badge/XLog-v1.1.4-brightgreen.svg
 [xl]: https://github.com/xuexiangjys/XLog
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
