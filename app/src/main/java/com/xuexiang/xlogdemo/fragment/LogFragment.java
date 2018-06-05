@@ -16,8 +16,13 @@
 
 package com.xuexiang.xlogdemo.fragment;
 
+import android.os.Environment;
+
 import com.google.gson.Gson;
+import com.xuexiang.xaop.annotation.Permission;
+import com.xuexiang.xaop.consts.PermissionConsts;
 import com.xuexiang.xlog.XLog;
+import com.xuexiang.xlog.annotation.LogLevel;
 import com.xuexiang.xlog.logger.LoggerFactory;
 import com.xuexiang.xlogdemo.entity.UserInfo;
 import com.xuexiang.xpage.annotation.Page;
@@ -37,6 +42,8 @@ import java.util.List;
  */
 @Page(name = "日志记录")
 public class LogFragment extends XPageSimpleListFragment {
+    private final static String LOG_PATH = Environment.getExternalStorageDirectory() + "/xlog/logs/debug_logs";
+
     String json;
 
     @Override
@@ -72,6 +79,7 @@ public class LogFragment extends XPageSimpleListFragment {
         lists.add("打印XML数据");
         lists.add("打印错误信息");
         lists.add("适配第三方打印日志接口");
+        lists.add("设置日志输出根目录为绝对路径：" + LOG_PATH);
         return lists;
     }
 
@@ -112,8 +120,16 @@ public class LogFragment extends XPageSimpleListFragment {
                     Logger.e(e);
                 }
                 break;
+            case 5:
+                setDebugLogAbsolutePath();
+                break;
             default:
                 break;
         }
+    }
+
+    @Permission(PermissionConsts.STORAGE)
+    public void setDebugLogAbsolutePath() {
+        LoggerFactory.getDiskLogger("DEBUG_LOGGER", LOG_PATH, true, "debug_log_", 0, LogLevel.DEBUG);
     }
 }

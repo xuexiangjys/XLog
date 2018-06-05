@@ -142,17 +142,14 @@ public class DiskLogStrategy implements ILogStrategy {
             logLevels.add(LogLevel.WTF);
         }
 
-        public String getLogDir() {
-            return logDir;
-        }
-
         public Builder setLogDir(String logDir) {
             this.logDir = logDir;
             return this;
         }
 
-        public String getLogPrefix() {
-            return logPrefix;
+        public Builder setAbsolutePath(boolean absolutePath) {
+            this.absolutePath = absolutePath;
+            return this;
         }
 
         public Builder setLogPrefix(String logPrefix) {
@@ -160,26 +157,14 @@ public class DiskLogStrategy implements ILogStrategy {
             return this;
         }
 
-        public int getLogSegment() {
-            return logSegment;
-        }
-
         public Builder setLogSegment(int logSegment) {
             this.logSegment = logSegment;
             return this;
         }
 
-        public long getZoneOffset() {
-            return zoneOffset;
-        }
-
         public Builder setZoneOffset(long zoneOffset) {
             this.zoneOffset = zoneOffset;
             return this;
-        }
-
-        public List<String> getLogLevels() {
-            return logLevels;
         }
 
         public Builder setLogLevels(List<String> logLevels) {
@@ -192,17 +177,34 @@ public class DiskLogStrategy implements ILogStrategy {
             return this;
         }
 
+        public DiskLogStrategy build() {
+            return new DiskLogStrategy(this);
+        }
+
+
+        public String getLogDir() {
+            return logDir;
+        }
+
         public boolean isAbsolutePath() {
             return absolutePath;
         }
 
-        public Builder setAbsolutePath(boolean absolutePath) {
-            this.absolutePath = absolutePath;
-            return this;
+        public String getLogPrefix() {
+            return logPrefix;
         }
 
-        public DiskLogStrategy build() {
-            return new DiskLogStrategy(this);
+        public int getLogSegment() {
+            return logSegment;
         }
+
+        public long getZoneOffset() {
+            return zoneOffset;
+        }
+
+        public List<String> getLogLevels() {
+            return logLevels;
+        }
+
     }
 }
