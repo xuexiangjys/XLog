@@ -69,7 +69,7 @@ allprojects {
 ```
 dependencies {
    ...
-   implementation 'com.github.xuexiangjys:XLog:1.1.4'
+   implementation 'com.github.xuexiangjys:XLog:1.1.5'
 }
 ```
 
@@ -247,7 +247,7 @@ https://github.com/JiongBull/jlog
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
 
-[xlsvg]: https://img.shields.io/badge/XLog-v1.1.4-brightgreen.svg
+[xlsvg]: https://img.shields.io/badge/XLog-v1.1.5-brightgreen.svg
 [xl]: https://github.com/xuexiangjys/XLog
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
