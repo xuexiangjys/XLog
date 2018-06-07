@@ -13,7 +13,7 @@
 
     <application>
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="android.support.v4.content.XLogFileProvider"
             android:authorities="${applicationId}.xlog.provider"
             android:exported="false"
             android:grantUriPermissions="true">
