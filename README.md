@@ -211,11 +211,15 @@ void log(@LogLevel String level, String tag, String message, Throwable throwable
 
 * ToastCrashListener：简单的toast提示 + 程序自动启动。
 
-* SendEmailCrashListener：发送崩溃日志邮件。
+* SendEmailCrashListener：系统方式发送崩溃日志邮件。
+
+* AutoSendEmailCrashListener：自动调用API发送崩溃日志邮件。
+
 
 ```
 CrashHandler.getInstance().setOnCrashListener(new ToastCrashListener());
 CrashHandler.getInstance().setOnCrashListener(new SendEmailCrashListener());
+CrashHandler.getInstance().setOnCrashListener(new AutoSendEmailCrashListener());
 ```
 
 当然，你也可以实现你自己的崩溃Crash处理，只需要实现OnCrashListener接口即可。
