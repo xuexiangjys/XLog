@@ -142,7 +142,9 @@ public class CrashActivity extends AppCompatActivity {
                 .append("\n")
                 .append(model.getExceptionMsg())
                 .append("\n");
-        builder.append("\n");//空一行，好看点，(#^.^#)
+
+        //空一行，好看点，(#^.^#)
+        builder.append("\n");
 
         builder.append(getString(R.string.simplePackageName))
                 .append(model.getPackageName()).append("\n");
@@ -152,12 +154,16 @@ public class CrashActivity extends AppCompatActivity {
         builder.append(getString(R.string.simpleLineNum)).append(model.getLineNumber()).append("\n");
         builder.append(getString(R.string.simpleExceptionType)).append(model.getExceptionType()).append("\n");
         builder.append(getString(R.string.simpleTime)).append(df.format(model.getTime())).append("\n");
-        builder.append("\n");//空一行，好看点，(#^.^#)
+
+        //空一行，好看点，(#^.^#)
+        builder.append("\n");
 
         builder.append(getString(R.string.simpleModel)).append(model.getDevice().getModel()).append("\n");
         builder.append(getString(R.string.simpleBrand)).append(model.getDevice().getBrand()).append("\n");
         builder.append(getString(R.string.simpleVersion)).append(model.getDevice().getVersion()).append("\n");
-        builder.append("\n");//空一行，好看点，(#^.^#)
+
+        //空一行，好看点，(#^.^#)
+        builder.append("\n");
 
         builder.append(getString(R.string.simpleAllInfo))
                 .append("\n")
@@ -187,7 +193,7 @@ public class CrashActivity extends AppCompatActivity {
         //判断请求码，确定当前申请的权限
         if (requestCode == REQUEST_CODE) {
             //判断权限是否申请通过
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //授权成功
                 shareImage();
             } else {
