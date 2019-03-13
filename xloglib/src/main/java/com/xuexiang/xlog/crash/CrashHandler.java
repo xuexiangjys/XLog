@@ -20,6 +20,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.util.Log;
 
 import com.xuexiang.xlog.utils.FileUtils;
@@ -31,11 +32,10 @@ import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 /**
- * <pre>
- *     desc   : 在Application中统一捕获异常，保存到文件中下次再打开时上传
- *     author : xuexiang
- *     time   : 2018/5/13 下午10:33
- * </pre>
+ * 在Application中统一捕获异常，保存到文件中下次再打开时上传
+ *
+ * @author xuexiang
+ * @since 2019/3/13 下午11:34
  */
 public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
     private final static String DEFAULT_CRASH_LOG_FLAG = "crash_log";
@@ -277,13 +277,21 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @param throwable 出错信息
      * @return {@code true}:处理了该异常信息;<br>{@code false}:该异常信息未处理。
      */
-    private boolean handleException(Throwable throwable) {
+    private boolean handleException(final Throwable throwable) {
         if (throwable == null || mContext == null || mOnCrashListener == null) {
             return false;
         }
         setIsHandledCrash(false);
         mCrashLogFile = saveCrashInfo(throwable); //保存崩溃信息到本地文件
-        mOnCrashListener.onCrash(mContext, this, throwable);
+
+        new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                mOnCrashListener.onCrash(mContext, CrashHandler.this, throwable);
+                Looper.loop();
+            }
+        }.start();
         return true;
     }
 

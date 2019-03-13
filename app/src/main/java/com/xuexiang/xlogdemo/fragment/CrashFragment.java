@@ -24,6 +24,7 @@ import com.xuexiang.xlog.crash.CrashHandler;
 import com.xuexiang.xlog.crash.SendEmailCrashListener;
 import com.xuexiang.xlog.crash.ToastCrashListener;
 import com.xuexiang.xlogdemo.crash.mail.AutoSendEmailCrashListener;
+import com.xuexiang.xlogdemo.crash.ui.ShowActivityCrashListener;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.base.XPageSimpleListFragment;
 import com.xuexiang.xutil.system.PermissionUtils;
@@ -52,6 +53,7 @@ public class CrashFragment extends XPageSimpleListFragment {
         lists.add("崩溃处理：简单的toast提示 + 程序自动启动。");
         lists.add("崩溃处理：系统方式发送崩溃日志邮件。");
         lists.add("崩溃处理：自动发送崩溃日志邮件。");
+        lists.add("崩溃处理：弹出新的Activity浏览界面。");
         lists.add("设置崩溃日志输出根目录为绝对路径：" + CRASH_PATH);
         return lists;
     }
@@ -83,6 +85,10 @@ public class CrashFragment extends XPageSimpleListFragment {
                 crash();
                 break;
             case 3:
+                CrashHandler.getInstance().setOnCrashListener(new ShowActivityCrashListener());
+                crash();
+                break;
+            case 4:
                 setAbsolutePath();
                 break;
             default:

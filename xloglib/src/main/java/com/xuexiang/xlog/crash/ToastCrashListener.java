@@ -18,7 +18,6 @@
 package com.xuexiang.xlog.crash;
 
 import android.content.Context;
-import android.os.Looper;
 import android.widget.Toast;
 
 /**
@@ -38,14 +37,7 @@ public class ToastCrashListener implements OnCrashListener {
      */
     @Override
     public void onCrash(final Context context, final ICrashHandler crashHandler, Throwable throwable) {
-        new Thread() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                Toast.makeText(context, "程序无响应，正在恢复...", Toast.LENGTH_SHORT).show();
-                crashHandler.setIsHandledCrash(true);
-                Looper.loop();
-            }
-        }.start();
+        Toast.makeText(context, "程序无响应，正在恢复...", Toast.LENGTH_SHORT).show();
+        crashHandler.setIsHandledCrash(true);
     }
 }

@@ -3,7 +3,6 @@ package com.xuexiang.xlogdemo.crash.mail;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Looper;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -111,14 +110,7 @@ public class AutoSendEmailCrashListener implements OnCrashListener {
      */
     @Override
     public void onCrash(final Context context, final ICrashHandler crashHandler, final Throwable throwable) {
-        new Thread() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                sendAppCrashReport(context, crashHandler, throwable);
-                Looper.loop();
-            }
-        }.start();
+        sendAppCrashReport(context, crashHandler, throwable);
     }
 
 
