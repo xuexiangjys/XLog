@@ -17,24 +17,22 @@
 
 package com.xuexiang.xlog;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.xuexiang.xlog.crash.CrashHandler;
 import com.xuexiang.xlog.logger.ILogger;
-import com.xuexiang.xlog.logger.Logger;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <pre>
- *     desc   : XLog全局日志打印
- *     author : xuexiang
- *     time   : 2018/5/13 上午10:02
- * </pre>
+ * XLog全局日志打印
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午7:33
  */
 public class XLog implements ILogger {
     private static Context sContext;
@@ -43,15 +41,38 @@ public class XLog implements ILogger {
     /**
      * 日志容器.
      */
-    private final Map<String, ILogger> mLoggers = new ConcurrentHashMap<>();
+    private final Map<String, ILogger> mLoggers;
 
     private XLog() {
-
+        mLoggers = new ConcurrentHashMap<>();
     }
 
-    public static void init(Context context) {
-        sContext = context.getApplicationContext();
+    /**
+     * 初始化日志【包括崩溃处理】
+     *
+     * @param application
+     */
+    public static void init(@NonNull Application application) {
+        sContext = application.getApplicationContext();
         CrashHandler.getInstance().init(sContext);
+    }
+
+    /**
+     * 初始化日志【不包括崩溃处理】
+     *
+     * @param context
+     */
+    public static void init(@NonNull Context context) {
+        sContext = context.getApplicationContext();
+    }
+
+    /**
+     * 初始化崩溃处理
+     *
+     * @param context
+     */
+    public static void initCrashHandler(@NonNull Context context) {
+        CrashHandler.getInstance().init(context);
     }
 
     public static Context getContext() {
@@ -106,6 +127,24 @@ public class XLog implements ILogger {
     }
 
     /**
+     * 去除日志
+     *
+     * @param logName
+     */
+    public void removeLogger(String logName) {
+        mLoggers.remove(logName);
+    }
+
+    /**
+     * 去除日志
+     *
+     * @param logger
+     */
+    public void removeLogger(@NonNull ILogger logger) {
+        mLoggers.remove(logger.getName());
+    }
+
+    /**
      * 清除日志
      */
     public void clearLoggers() {
@@ -130,13 +169,8 @@ public class XLog implements ILogger {
      */
     @Override
     public XLog tag(String tag) {
-        Iterator it = mLoggers.entrySet().iterator();
-        synchronized (it) {
-            while (it.hasNext()) {
-                Map.Entry<String, Logger> entry = (Map.Entry<String, Logger>) it.next();
-                Logger logger = entry.getValue();
-                logger.tag(tag);
-            }
+        for (ILogger logger : mLoggers.values()) {
+            logger.tag(tag);
         }
         return this;
     }
@@ -161,14 +195,10 @@ public class XLog implements ILogger {
      *
      * @param isDebug
      */
+    @Override
     public XLog debug(boolean isDebug) {
-        Iterator it = mLoggers.entrySet().iterator();
-        synchronized (it) {
-            while (it.hasNext()) {
-                Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-                ILogger logger = entry.getValue();
-                logger.debug(isDebug);
-            }
+        for (ILogger logger : mLoggers.values()) {
+            logger.debug(isDebug);
         }
         return this;
     }
@@ -196,10 +226,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void d(String message, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.d(message, args);
         }
     }
@@ -211,10 +238,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void d(Object object) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.d(object);
         }
     }
@@ -227,10 +251,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void e(String message, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.e(message, args);
         }
     }
@@ -243,10 +264,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void e(Throwable throwable, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.e(throwable, args);
         }
     }
@@ -260,10 +278,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void e(Throwable throwable, String message, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.e(throwable, message, args);
         }
     }
@@ -276,10 +291,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void w(String message, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.w(message, args);
         }
     }
@@ -292,10 +304,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void i(String message, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.i(message, args);
         }
     }
@@ -308,10 +317,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void v(String message, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.v(message, args);
         }
     }
@@ -324,10 +330,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void wtf(String message, Object... args) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.wtf(message, args);
         }
     }
@@ -339,10 +342,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void json(String json) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.json(json);
         }
     }
@@ -354,10 +354,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void xml(String xml) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.xml(xml);
         }
     }
@@ -372,10 +369,7 @@ public class XLog implements ILogger {
      */
     @Override
     public void log(String level, String tag, String message, Throwable throwable) {
-        Iterator it = mLoggers.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, ILogger> entry = (Map.Entry<String, ILogger>) it.next();
-            ILogger logger = entry.getValue();
+        for (ILogger logger : mLoggers.values()) {
             logger.log(level, tag, message, throwable);
         }
     }

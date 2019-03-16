@@ -27,11 +27,10 @@ import com.xuexiang.xlog.strategy.log.DiskLogStrategy;
 import com.xuexiang.xlog.strategy.log.ILogStrategy;
 
 /**
- * <pre>
- *     desc   : Logger静态生产工厂
- *     author : xuexiang
- *     time   : 2018/5/13 下午11:35
- * </pre>
+ * Logger静态生产工厂(构建的logger都将自动加入Log缓存池）
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午8:57
  */
 public final class LoggerFactory {
 

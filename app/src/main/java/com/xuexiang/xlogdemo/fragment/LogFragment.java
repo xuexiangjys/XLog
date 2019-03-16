@@ -49,6 +49,7 @@ public class LogFragment extends XPageSimpleListFragment {
     @Override
     protected void initArgs() {
         super.initArgs();
+
         UserInfo userInfo = new UserInfo()
                 .setLoginName("xuexiang")
                 .setPassword("12345678");

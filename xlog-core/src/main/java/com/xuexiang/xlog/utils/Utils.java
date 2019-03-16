@@ -55,11 +55,23 @@ import static com.xuexiang.xlog.annotation.LogLevel.WARN;
 import static com.xuexiang.xlog.annotation.LogLevel.WTF;
 import static com.xuexiang.xlog.utils.FileUtils.ZIP_EXT;
 
+/**
+ * XLog日志框架相关的工具类
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午9:40
+ */
 public final class Utils {
-    public static final String LINE_BREAK = "\r\n";// 换行符
+    /**
+     * 换行符
+     */
+    public static final String LINE_BREAK = "\r\n";
     public static final String SINGLE_DIVIDER = "------------------------------------------------------------------------------------";
     //    public static final String LINE_BREAK = System.lineSeparator();// 换行符
-    public static final String CLASS_METHOD_LINE_FORMAT = "%s.%s()  Line:%d  (%s)\r\n\n";// 格式化日志信息
+    /**
+     * 格式化日志信息
+     */
+    public static final String CLASS_METHOD_LINE_FORMAT = "%s.%s()  Line:%d  (%s)\r\n\n";
 
     private static final String TAG = "Utils";
     /**
@@ -476,7 +488,9 @@ public final class Utils {
      * "Inner assignments should be avoided"
      */
     public static boolean equals(CharSequence a, CharSequence b) {
-        if (a == b) return true;
+        if (a == b) {
+            return true;
+        }
         if (a != null && b != null) {
             int length = a.length();
             if (length == b.length()) {
@@ -484,7 +498,9 @@ public final class Utils {
                     return a.equals(b);
                 } else {
                     for (int i = 0; i < length; i++) {
-                        if (a.charAt(i) != b.charAt(i)) return false;
+                        if (a.charAt(i) != b.charAt(i)) {
+                            return false;
+                        }
                     }
                     return true;
                 }

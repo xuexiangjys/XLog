@@ -22,16 +22,8 @@ import android.content.Context;
 import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xlog.XLog;
 import com.xuexiang.xlog.annotation.LogLevel;
-import com.xuexiang.xlog.annotation.LogSegment;
-import com.xuexiang.xlog.crash.CrashHandler;
-import com.xuexiang.xlog.crash.SendEmailCrashListener;
-import com.xuexiang.xlog.logger.Logger;
 import com.xuexiang.xlog.logger.LoggerFactory;
-import com.xuexiang.xlog.strategy.format.DiskFormatStrategy;
-import com.xuexiang.xlog.strategy.format.IFormatStrategy;
 import com.xuexiang.xlog.strategy.log.DiskLogStrategy;
-import com.xuexiang.xlog.strategy.log.ILogStrategy;
-import com.xuexiang.xlog.utils.TimeUtils;
 import com.xuexiang.xpage.AppPageConfig;
 import com.xuexiang.xpage.PageConfig;
 import com.xuexiang.xpage.PageConfiguration;
@@ -52,6 +44,10 @@ public class MyApplication extends Application {
 
         initLibs();
 
+        initLog();
+    }
+
+    private void initLog() {
         XLog.init(this);
 
 //        Logger.newBuilder("PrettyLogger").build();
@@ -67,7 +63,9 @@ public class MyApplication extends Application {
 //                .build();
 
         DiskLogStrategy diskLogStrategy = LoggerFactory.getDiskLogStrategy(
-                "xlogDemo", "xlog", LogLevel.ERROR, LogLevel.DEBUG
+                "xlogDemo", //日志存储的目录名（相对路径）
+                "xlog",  //生成日志的前缀名
+                LogLevel.ERROR, LogLevel.DEBUG //日志记录的等级
         );
 
 //        IFormatStrategy formatStrategy = DiskFormatStrategy.newBuilder()  //日志格式策略
@@ -81,17 +79,23 @@ public class MyApplication extends Application {
 //                .build();
 
         //构建磁盘打印
-        LoggerFactory.getSimpleDiskLogger("DiskLogger", diskLogStrategy, 0);
+        LoggerFactory.getSimpleDiskLogger(
+                "DiskLogger", //Log的标示名
+                diskLogStrategy, //磁盘打印的策略
+                0  //方法的偏移（默认是0，可根据自己的需要设定）
+        );
     }
 
     private void initLibs() {
         XUtil.init(this);
         XUtil.debug(true);
         XAOP.init(this);
-        PageConfig.getInstance().setPageConfiguration(new PageConfiguration() { //页面注册
+        //页面注册
+        PageConfig.getInstance().setPageConfiguration(new PageConfiguration() {
             @Override
             public List<PageInfo> registerPages(Context context) {
-                return AppPageConfig.getInstance().getPages(); //自动注册页面
+                //自动注册页面
+                return AppPageConfig.getInstance().getPages();
             }
         }).debug("PageLog").enableWatcher(false).init(this);
     }

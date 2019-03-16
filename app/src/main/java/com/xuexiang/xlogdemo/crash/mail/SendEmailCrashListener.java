@@ -15,7 +15,7 @@
  *
  */
 
-package com.xuexiang.xlog.crash;
+package com.xuexiang.xlogdemo.crash.mail;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -25,16 +25,17 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.xuexiang.xlog.R;
+import com.xuexiang.xlog.crash.ICrashHandler;
+import com.xuexiang.xlog.crash.OnCrashListener;
 import com.xuexiang.xlog.utils.FileUtils;
 
 import java.io.File;
 
 /**
- * <pre>
- *     desc   : 发邮件的崩溃监听
- *     author : xuexiang
- *     time   : 2018/5/13 上午10:40
- * </pre>
+ * 发邮件的崩溃监听
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午7:10
  */
 public class SendEmailCrashListener implements OnCrashListener {
     /**
@@ -100,6 +101,7 @@ public class SendEmailCrashListener implements OnCrashListener {
                 .setMessage(R.string.xlog_tip_crash_msg)
                 .setPositiveButton(R.string.xlog_lab_submit_report,
                         new DialogInterface.OnClickListener() {
+                            @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 sendCrashReportEmail(context, crashHandler, crashLogFile, crashReport);
                             }
@@ -113,6 +115,7 @@ public class SendEmailCrashListener implements OnCrashListener {
                 })
                 .setNegativeButton(android.R.string.cancel,
                         new DialogInterface.OnClickListener() {
+                            @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // 退出
                                 crashHandler.setIsHandledCrash(true);
@@ -165,8 +168,9 @@ public class SendEmailCrashListener implements OnCrashListener {
             e.printStackTrace();
             Toast.makeText(context, "当前设备无邮件应用，无法发送！", Toast.LENGTH_LONG).show();
         } finally {
-            // 退出
-            crashHandler.setIsNeedReopen(false); //禁止重启
+            //禁止重启
+            crashHandler.setIsNeedReopen(false);
+            //处理完毕退出
             crashHandler.setIsHandledCrash(true);
         }
     }

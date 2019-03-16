@@ -21,11 +21,10 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * <pre>
- *     desc   : 启动程序广播接收器
- *     author : xuexiang
- *     time   : 2018/5/13 上午10:11
- * </pre>
+ * 启动程序广播接收器
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午7:09
  */
 public class StartAppReceiver extends BroadcastReceiver {
 

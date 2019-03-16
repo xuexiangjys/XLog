@@ -24,13 +24,11 @@ import com.xuexiang.xlog.annotation.LogSegment;
 
 import java.io.File;
 
-
 /**
- * <pre>
- *     desc   : 打印相关
- *     author : xuexiang
- *     time   : 2018/5/13 下午10:08
- * </pre>
+ * 打印相关
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午7:31
  */
 public final class PrinterUtils {
 

@@ -105,7 +105,6 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
     private CrashHandler() {
         mIsHandledCrash = false;
         mIsNeedReopen = true;
-        mOnCrashListener = new ToastCrashListener();
 
         mCrashLogDir = DEFAULT_CRASH_LOG_FLAG;
         mAbsolutePath = false;
@@ -148,8 +147,15 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @return
      */
     public CrashHandler setOnCrashListener(OnCrashListener listener) {
+        testInitialize();
         mOnCrashListener = listener;
         return this;
+    }
+
+    private void testInitialize() {
+        if (mContext == null) {
+            throw new ExceptionInInitializerError("请先在全局Application中调用 XLog.init() 初始化或者调用 XLog.initCrashHandler() 进行初始化！");
+        }
     }
 
     /**
@@ -188,6 +194,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @return
      */
     public CrashHandler setCrashLogDir(String crashLogDir) {
+        testInitialize();
         mCrashLogDir = crashLogDir;
         return this;
     }
@@ -199,6 +206,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @return
      */
     public CrashHandler setAbsolutePath(boolean absolutePath) {
+        testInitialize();
         mAbsolutePath = absolutePath;
         return this;
     }
@@ -210,6 +218,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @return
      */
     public CrashHandler setCrashLogPrefix(String crashLogPrefix) {
+        testInitialize();
         mCrashLogPrefix = crashLogPrefix;
         return this;
     }
@@ -221,6 +230,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @return
      */
     public CrashHandler setZoneOffset(long zoneOffset) {
+        testInitialize();
         mZoneOffset = zoneOffset;
         return this;
     }
@@ -232,6 +242,7 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
      * @return
      */
     public CrashHandler setTimeFormat(String timeFormat) {
+        testInitialize();
         mTimeFormat = timeFormat;
         return this;
     }
@@ -259,7 +270,8 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
                     PendingIntent restartIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
                     //退出程序
                     AlarmManager mgr = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-                    mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, restartIntent); // 1秒钟后重启应用
+                    // 1秒钟后重启应用
+                    mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, restartIntent);
                 }
 
                 android.os.Process.killProcess(android.os.Process.myPid());
@@ -282,8 +294,8 @@ public class CrashHandler implements UncaughtExceptionHandler, ICrashHandler {
             return false;
         }
         setIsHandledCrash(false);
-        mCrashLogFile = saveCrashInfo(throwable); //保存崩溃信息到本地文件
-
+        //保存崩溃信息到本地文件
+        mCrashLogFile = saveCrashInfo(throwable);
         new Thread() {
             @Override
             public void run() {

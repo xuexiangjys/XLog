@@ -39,13 +39,11 @@ import java.util.Comparator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-
 /**
- * <pre>
- *     desc   : 文件相关
- *     author : xuexiang
- *     time   : 2018/5/13 下午10:07
- * </pre>
+ * 文件相关
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午7:30
  */
 public final class FileUtils {
     /**
@@ -139,7 +137,8 @@ public final class FileUtils {
             File sourceFile = new File(sourcePath);
             zip(zos, sourceFile, null);
             if (isClean) {
-                boolean deleteResult = delete(sourceFile); // 压缩完毕后删除
+                // 压缩完毕后删除
+                boolean deleteResult = delete(sourceFile);
                 if (!deleteResult) {
                     Log.e("FileUtils", "delete file failed");
                 }
@@ -292,7 +291,9 @@ public final class FileUtils {
      * @return a content URI for a given file
      */
     public static Uri getUriForFile(final File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             String authority = XLog.getContext().getPackageName() + ".xlog.provider";
             return FileProvider.getUriForFile(XLog.getContext(), authority, file);

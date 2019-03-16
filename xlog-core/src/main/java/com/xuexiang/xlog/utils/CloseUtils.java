@@ -21,13 +21,12 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * <pre>
- *     desc   : IO相关
- *     author : xuexiang
- *     time   : 2018/5/13 下午10:54
- * </pre>
+ * IO相关
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午7:29
  */
-public final class CloseUtils {
+final class CloseUtils {
 
     private CloseUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
@@ -38,8 +37,10 @@ public final class CloseUtils {
      *
      * @param closeables closeables
      */
-    public static void closeQuietly(final Closeable... closeables) {
-        if (closeables == null) return;
+    static void closeQuietly(final Closeable... closeables) {
+        if (closeables == null) {
+            return;
+        }
         for (Closeable closeable : closeables) {
             if (closeable != null) {
                 try {

@@ -20,11 +20,10 @@ package com.xuexiang.xlog.crash;
 import java.io.File;
 
 /**
- * <pre>
- *     desc   : 崩溃处理者
- *     author : xuexiang
- *     time   : 2018/5/13 上午10:41
- * </pre>
+ * 崩溃处理者
+ *
+ * @author xuexiang
+ * @since 2019/3/16 下午7:11
  */
 public interface ICrashHandler {
 

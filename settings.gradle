@@ -1,1 +1,1 @@
-include ':app', ':xloglib'
+include ':app', ':xlog-core'
