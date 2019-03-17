@@ -234,14 +234,14 @@ public class MailInfo extends Authenticator implements Parcelable {
         for (String toEmail : mToEmails) {
             msg.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toEmail));
         }
+        //抄送人（抄送人设置为发件人，就是为了解决垃圾邮件的验证）
+        msg.setRecipient(MimeMessage.RecipientType.CC, fromAddress);
         //抄送人
         if (mCcEmails != null && mCcEmails.length > 0) {
             for (String ccEmail : mCcEmails) {
                 msg.addRecipient(MimeMessage.RecipientType.CC, new InternetAddress(ccEmail));
             }
         }
-        //抄送人（抄送人设置为发件人，就是为了解决垃圾邮件的验证）
-        msg.addRecipient(MimeMessage.RecipientType.CC, fromAddress);
         msg.setSubject(mTitle);
         msg.setSentDate(new Date());
         // setup message 正文
