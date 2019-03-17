@@ -41,7 +41,7 @@ public class ShowActivityCrashListener implements OnCrashListener {
 
         Intent intent = new Intent(context, CrashActivity.class);
         intent.putExtra(CrashActivity.KEY_CRASH_INFO, crashInfo);
-        intent.putExtra(CrashActivity.KEY_MAIL_INFO, XCrash.getMailInfo());
+        intent.putExtra(CrashActivity.KEY_MAIL_INFO, XCrash.getPrepareMailInfo());
         intent.putExtra(CrashActivity.KEY_THEME_ID, mThemeId);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

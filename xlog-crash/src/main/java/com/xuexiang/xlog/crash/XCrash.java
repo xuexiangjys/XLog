@@ -155,6 +155,11 @@ public class XCrash {
     //============get==============//
 
     public static MailInfo getMailInfo() {
+        return getInstance().mMailInfo;
+    }
+
+
+    public static MailInfo getPrepareMailInfo() {
         if (!enableSendEmail()) {
             return null;
         }
