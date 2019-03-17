@@ -25,7 +25,7 @@ import com.xuexiang.xlog.crash.XCrash;
 import com.xuexiang.xlog.crash.mail.AutomaticEmailCrashListener;
 import com.xuexiang.xlog.crash.mail.SystemEmailCrashListener;
 import com.xuexiang.xlog.crash.ui.ShowActivityCrashListener;
-import com.xuexiang.xlogdemo.crash.ToastCrashListener;
+import com.xuexiang.xlog.crash.ui.ToastCrashListener;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.base.XPageSimpleListFragment;
 import com.xuexiang.xutil.system.PermissionUtils;

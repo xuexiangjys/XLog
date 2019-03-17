@@ -38,9 +38,9 @@ allprojects {
 ```
 dependencies {
    ...
-   implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.0'
+   implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.1'
    //崩溃处理相关（非必要）
-   implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.0'
+   implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.1'
 }
 ```
 
@@ -61,7 +61,7 @@ https://github.com/JiongBull/jlog
 [![](https://img.shields.io/badge/点击一键加入QQ群-602082750-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=9922861ef85c19f1575aecea0e8680f60d9386080a97ed310c971ae074998887)
 
 
-[xlsvg]: https://img.shields.io/badge/XLog-v1.2.0-brightgreen.svg
+[xlsvg]: https://img.shields.io/badge/XLog-v1.2.1-brightgreen.svg
 [xl]: https://github.com/xuexiangjys/XLog
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14

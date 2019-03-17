@@ -69,9 +69,9 @@ allprojects {
 ```
 dependencies {
    ...
-   implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.0'
+   implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.1'
    //崩溃处理相关（非必要）
-   implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.0'
+   implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.1'
 }
 ```
 
@@ -213,15 +213,28 @@ void log(@LogLevel String level, String tag, String message, Throwable throwable
 
 * ToastCrashListener：简单的toast提示 + 程序自动启动。
 
-* SendEmailCrashListener：系统方式发送崩溃日志邮件。
+* SystemEmailCrashListener：系统方式发送崩溃日志邮件。
 
-* AutoSendEmailCrashListener：自动调用API发送崩溃日志邮件。
+* AutomaticEmailCrashListener：自动调用API发送崩溃日志邮件。
+
+* ShowActivityCrashListener：显示崩溃信息详情界面，支持崩溃信息的分享。
 
 
 ```
 CrashHandler.getInstance().setOnCrashListener(new ToastCrashListener());
-CrashHandler.getInstance().setOnCrashListener(new SendEmailCrashListener());
-CrashHandler.getInstance().setOnCrashListener(new AutoSendEmailCrashListener());
+CrashHandler.getInstance().setOnCrashListener(new SystemEmailCrashListener());
+CrashHandler.getInstance().setOnCrashListener(new AutomaticEmailCrashListener());
+CrashHandler.getInstance().setOnCrashListener(new ShowActivityCrashListener());
+```
+
+如果需要使用到邮件发送，需要进行相关邮件信息的配置：
+
+```
+XCrash.getInstance()
+    .setSendEmail(DEFAULT_SEND_EMAIL_ADDRESS)
+    .setAuthorizationCode(DEFAULT_SEND_PASSWORD)
+    .setToEmails(DEFAULT_TO_EMAIL_ADDRESS)
+    .setCcEmails(DEFAULT_CC_EMAIL_ADDRESS);
 ```
 
 当然，你也可以实现你自己的崩溃Crash处理，只需要实现OnCrashListener接口即可。
@@ -253,7 +266,7 @@ https://github.com/JiongBull/jlog
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
 
-[xlsvg]: https://img.shields.io/badge/XLog-v1.2.0-brightgreen.svg
+[xlsvg]: https://img.shields.io/badge/XLog-v1.2.1-brightgreen.svg
 [xl]: https://github.com/xuexiangjys/XLog
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
