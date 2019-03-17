@@ -15,13 +15,13 @@
  *
  */
 
-package com.xuexiang.xlogdemo.crash.ui;
+package com.xuexiang.xlogdemo.crash;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.xuexiang.xlog.crash.ICrashHandler;
 import com.xuexiang.xlog.crash.OnCrashListener;
-import com.xuexiang.xutil.tip.ToastUtils;
 
 /**
  * 简单提示toast的崩溃处理
@@ -39,7 +39,7 @@ public class ToastCrashListener implements OnCrashListener {
      */
     @Override
     public void onCrash(final Context context, final ICrashHandler crashHandler, Throwable throwable) {
-        ToastUtils.toast("程序无响应，正在恢复...");
+        Toast.makeText(context, "程序无响应，正在恢复...", Toast.LENGTH_LONG).show();
         crashHandler.setIsHandledCrash(true);
     }
 }

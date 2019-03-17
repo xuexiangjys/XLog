@@ -21,7 +21,7 @@
 * 支持打印线程信息。
 * 支持打印方法的数量。
 * 支持捕捉并打印崩溃日志。
-* 支持自定义崩溃日志处理。
+* 支持自定义崩溃日志处理【默认提供了3种处理方式】。
 * 支持第三方打印接口适配。
 
 ## 1、演示（请star支持）
@@ -69,7 +69,9 @@ allprojects {
 ```
 dependencies {
    ...
-   implementation 'com.github.xuexiangjys:XLog:1.1.5'
+   implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.0'
+   //崩溃处理相关（非必要）
+   implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.0'
 }
 ```
 
@@ -251,7 +253,7 @@ https://github.com/JiongBull/jlog
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
 
-[xlsvg]: https://img.shields.io/badge/XLog-v1.1.5-brightgreen.svg
+[xlsvg]: https://img.shields.io/badge/XLog-v1.2.0-brightgreen.svg
 [xl]: https://github.com/xuexiangjys/XLog
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
