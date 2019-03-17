@@ -8,4 +8,7 @@
     <string name="xlog_title_crash_report_email">Android客户端 - 错误报告</string>
     <string name="xlog_content_crash_report_email">请将此错误报告发送给我，以便我尽快修复此问题，谢谢合作！</string>
     <string name="xlog_title_please_choose_email_client">Choose Email Client</string>
+    <string name="xlog_email_send_success">邮件发送成功！</string>
+    <string name="xlog_email_send_failed">邮件发送失败，验证失败！</string>
+    <string name="xlog_no_application_support">当前设备无邮件应用，无法发送！</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.xuexiang.xlogdemo.crash.mail;
+package com.xuexiang.xlog.crash.mail;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,34 +8,19 @@ import android.widget.Toast;
 
 import com.xuexiang.xlog.crash.ICrashHandler;
 import com.xuexiang.xlog.crash.OnCrashListener;
-import com.xuexiang.xlogdemo.R;
-import com.xuexiang.xutil.data.DateUtils;
+import com.xuexiang.xlog.crash.R;
+import com.xuexiang.xlog.crash.XCrash;
+import com.xuexiang.xlog.utils.TimeUtils;
 
 import java.io.File;
 
 /**
- * 自动发送邮件
+ * 通过配置的邮件账户(最好是163邮箱)进行崩溃信息发送的监听【需要申请系统悬浮窗的权限】
  *
  * @author xuexiang
  * @since 2019/3/12 下午11:49
  */
-public class AutoSendEmailCrashListener implements OnCrashListener {
-
-    /**
-     * 默认发送地址
-     */
-    private final static String DEFAULT_SEND_EMAIL_ADDRESS = "xuexiangjys2012@163.com";
-    /**
-     * 默认抄送地址
-     */
-    private final static String DEFAULT_RECEIVE_EMAIL_ADDRESS = "xuexiangandroid@163.com";
-
-    private static final String DEFAULT_SEND_PASSWORD = "xuexiang123";
-
-    private static final String DEFAULT_HOST = "smtp.163.com";
-
-    private static final String DEFAULT_PORT = "465";
-
+public class AutomaticEmailCrashListener implements OnCrashListener {
     /**
      * 发送邮箱的地址
      */
@@ -45,61 +30,105 @@ public class AutoSendEmailCrashListener implements OnCrashListener {
      */
     private String mSendPassword;
     /**
-     * 接收邮件的地址
-     */
-    private String mReceiveEmail;
-    /**
-     * 设置SMTP主机
+     * SMTP服务主机
      */
     private String mServerHost;
     /**
-     * 设置端口
+     * SMTP服务端口
      */
     private String mServerPort;
+    /**
+     * 收件人的邮箱地址
+     */
+    private String[] mToEmails;
+//    /**
+//     * 抄送人的邮箱地址【暂时会被视为垃圾邮件】
+//     */
+//    private String[] mCcEmails;
 
-
-    public AutoSendEmailCrashListener() {
-        this(DEFAULT_SEND_EMAIL_ADDRESS, DEFAULT_SEND_PASSWORD, DEFAULT_RECEIVE_EMAIL_ADDRESS, DEFAULT_HOST, DEFAULT_PORT);
+    public AutomaticEmailCrashListener() {
+        this(
+                XCrash.getSendEmail(),
+                XCrash.getAuthorizationCode(),
+                XCrash.getServerHost(),
+                XCrash.getServerPort(),
+                XCrash.getToEmails(),
+                XCrash.getCcEmails()
+        );
     }
 
     /**
      * 构造方法
      *
-     * @param sendEmail    邮件发送地址
-     * @param receiveEmail 邮件抄送地址
+     * @param sendEmail    发送邮箱的地址
+     * @param sendPassword 发送邮箱的授权码
+     * @param host         SMTP服务主机
+     * @param port         SMTP服务端口
+     * @param toEmails     收件人的邮箱地址
+     * @param ccEmails     抄送人的邮箱地址
      */
-    public AutoSendEmailCrashListener(String sendEmail, String sendPassword, String receiveEmail, String host, String port) {
+    public AutomaticEmailCrashListener(String sendEmail, String sendPassword, String host, String port, String[] toEmails, String[] ccEmails) {
         mSendEmail = sendEmail;
         mSendPassword = sendPassword;
-        mReceiveEmail = receiveEmail;
         mServerHost = host;
         mServerPort = port;
+        mToEmails = toEmails;
+//        mCcEmails = ccEmails;
     }
 
-    public AutoSendEmailCrashListener setSendEmail(String sendEmail) {
+    /**
+     * 设置发件人的邮箱地址
+     *
+     * @param sendEmail
+     * @return
+     */
+    public AutomaticEmailCrashListener setSendEmail(String sendEmail) {
         mSendEmail = sendEmail;
         return this;
     }
 
-    public AutoSendEmailCrashListener setSendPassword(String sendPassword) {
+    /**
+     * 设置发件人的授权码
+     *
+     * @param sendPassword
+     * @return
+     */
+    public AutomaticEmailCrashListener setSendPassword(String sendPassword) {
         mSendPassword = sendPassword;
         return this;
     }
 
-    public AutoSendEmailCrashListener setReceiveEmail(String receiveEmail) {
-        mReceiveEmail = receiveEmail;
-        return this;
-    }
-
-    public AutoSendEmailCrashListener setServerHost(String host) {
+    public AutomaticEmailCrashListener setServerHost(String host) {
         mServerHost = host;
         return this;
     }
 
-    public AutoSendEmailCrashListener setServerPort(String port) {
+    public AutomaticEmailCrashListener setServerPort(String port) {
         mServerPort = port;
         return this;
     }
+
+    /**
+     * 设置收件人邮件地址
+     *
+     * @param toEmails
+     * @return
+     */
+    public AutomaticEmailCrashListener setToEmails(String... toEmails) {
+        mToEmails = toEmails;
+        return this;
+    }
+
+//    /**
+//     * 设置抄送人邮件地址
+//     *
+//     * @param ccEmails
+//     * @return
+//     */
+//    public AutomaticEmailCrashListener setCcEmails(String... ccEmails) {
+//        mCcEmails = ccEmails;
+//        return this;
+//    }
 
     /**
      * 发生崩溃
@@ -162,21 +191,22 @@ public class AutoSendEmailCrashListener implements OnCrashListener {
      */
     private void sendCrashReportEmail(Context context, ICrashHandler crashHandler, File crashLogFile, String crashReport) {
         MailInfo sender = new MailInfo()
-                .setUser(mSendEmail)
-                .setPass(mSendPassword)
-                .setFrom(mSendEmail)
-                .setTo(mReceiveEmail)
+                .setAuthorizedUser(mSendEmail)
+                .setAuthorizationCode(mSendPassword)
+                .setSendEmail(mSendEmail)
+                .setToEmails(mToEmails)
+//                .setCcEmails(mCcEmails)
                 .setHost(mServerHost)
                 .setPort(mServerPort)
-                .setSubject(context.getString(R.string.xlog_title_crash_report_email) + "【" + DateUtils.getNowString(DateUtils.yyyyMMddHHmmss.get()) + "】")
-                .setBody(crashReport);
+                .setTitle(context.getString(R.string.xlog_title_crash_report_email) + "【" + TimeUtils.getCurTime("yyyy-MM-dd HH:mm:ss") + "】")
+                .setContent(crashReport);
         sender.init();
         try {
             sender.addAttachment(crashLogFile.getPath());
             sender.send();
-            Toast.makeText(context, "邮件发送成功！", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.xlog_email_send_success, Toast.LENGTH_LONG).show();
         } catch (Exception e) {
-            Toast.makeText(context, "邮件发送失败，验证失败！", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.xlog_email_send_failed, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         } finally { // 退出
             //禁止重启

@@ -160,6 +160,16 @@ public final class TimeUtils {
     }
 
     /**
+     * 获取当前时间.
+     *
+     * @param fmt 时间格式
+     * @return 目标时区的当前时间
+     */
+    public static String getCurTime(@NonNull String fmt) {
+        return format(getCurUtcMillis(), fmt);
+    }
+
+    /**
      * 获取目标时区的当前时间.
      *
      * @param zoneOffset 时区偏移

@@ -21,8 +21,9 @@ import android.os.Environment;
 import com.xuexiang.xaop.annotation.Permission;
 import com.xuexiang.xaop.consts.PermissionConsts;
 import com.xuexiang.xlog.crash.CrashHandler;
-import com.xuexiang.xlogdemo.crash.mail.AutoSendEmailCrashListener;
-import com.xuexiang.xlogdemo.crash.mail.SendEmailCrashListener;
+import com.xuexiang.xlog.crash.XCrash;
+import com.xuexiang.xlog.crash.mail.AutomaticEmailCrashListener;
+import com.xuexiang.xlog.crash.mail.SystemEmailCrashListener;
 import com.xuexiang.xlogdemo.crash.ui.ShowActivityCrashListener;
 import com.xuexiang.xlogdemo.crash.ui.ToastCrashListener;
 import com.xuexiang.xpage.annotation.Page;
@@ -42,6 +43,37 @@ import java.util.List;
 public class CrashFragment extends XPageSimpleListFragment {
 
     private final static String CRASH_PATH = Environment.getExternalStorageDirectory() + "/xlog/crash_logs/";
+
+
+    /**
+     * 默认发件人地址
+     */
+    private final static String DEFAULT_SEND_EMAIL_ADDRESS = "xuexiangjys2012@163.com";
+    /**
+     * 默认授权码
+     */
+    private static final String DEFAULT_SEND_PASSWORD = "xuexiang123";
+    /**
+     * 默认收件人地址
+     */
+    private final static String DEFAULT_TO_EMAIL_ADDRESS = "xuexiangandroid@163.com";
+    /**
+     * 默认抄收人地址
+     */
+    private final static String DEFAULT_CC_EMAIL_ADDRESS = "xuexiangjys2012@gmail.com";
+
+
+    @Override
+    protected void initArgs() {
+        super.initArgs();
+
+        XCrash.getInstance()
+                .setSendEmail(DEFAULT_SEND_EMAIL_ADDRESS)
+                .setAuthorizationCode(DEFAULT_SEND_PASSWORD)
+                .setToEmails(DEFAULT_TO_EMAIL_ADDRESS)
+                .setCcEmails(DEFAULT_CC_EMAIL_ADDRESS);
+    }
+
     /**
      * 初始化例子
      *
@@ -77,11 +109,11 @@ public class CrashFragment extends XPageSimpleListFragment {
                 crash();
                 break;
             case 1:
-                CrashHandler.getInstance().setOnCrashListener(new SendEmailCrashListener());
+                CrashHandler.getInstance().setOnCrashListener(new SystemEmailCrashListener());
                 crash();
                 break;
             case 2:
-                CrashHandler.getInstance().setOnCrashListener(new AutoSendEmailCrashListener());
+                CrashHandler.getInstance().setOnCrashListener(new AutomaticEmailCrashListener());
                 crash();
                 break;
             case 3:

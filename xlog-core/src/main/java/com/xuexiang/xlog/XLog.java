@@ -23,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.xuexiang.xlog.crash.CrashHandler;
+import com.xuexiang.xlog.crash.OnCrashListener;
 import com.xuexiang.xlog.logger.ILogger;
 
 import java.util.Map;
@@ -73,6 +74,15 @@ public class XLog implements ILogger {
      */
     public static void initCrashHandler(@NonNull Context context) {
         CrashHandler.getInstance().init(context);
+    }
+
+    /**
+     * 设置崩溃的监听器
+     *
+     * @param listener
+     */
+    public static void setOnCrashListener(OnCrashListener listener) {
+        CrashHandler.getInstance().setOnCrashListener(listener);
     }
 
     public static Context getContext() {

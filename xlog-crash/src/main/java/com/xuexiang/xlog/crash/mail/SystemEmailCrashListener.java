@@ -15,7 +15,7 @@
  *
  */
 
-package com.xuexiang.xlogdemo.crash.mail;
+package com.xuexiang.xlog.crash.mail;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -24,51 +24,65 @@ import android.content.Intent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.xuexiang.xlog.R;
 import com.xuexiang.xlog.crash.ICrashHandler;
 import com.xuexiang.xlog.crash.OnCrashListener;
+import com.xuexiang.xlog.crash.R;
+import com.xuexiang.xlog.crash.XCrash;
 import com.xuexiang.xlog.utils.FileUtils;
 
 import java.io.File;
 
 /**
- * 发邮件的崩溃监听
+ * 通过系统自带的邮件进行崩溃信息发送的监听【需要申请系统悬浮窗的权限】
  *
  * @author xuexiang
  * @since 2019/3/16 下午7:10
  */
-public class SendEmailCrashListener implements OnCrashListener {
+public class SystemEmailCrashListener implements OnCrashListener {
     /**
-     * 默认发送地址
+     * 收件人的邮箱地址
      */
-    private final static String DEFAULT_SEND_EMAIL_ADDRESS = "xuexiangandroid@163.com";
+    private String[] mToEmails;
     /**
-     * 默认抄送地址
+     * 抄送人的邮箱地址【暂时会被视为垃圾邮件】
      */
-    private final static String DEFAULT_COPY_EMAIL_ADDRESS = "xuexiangjys2012@gmail.com";
+    private String[] mCcEmails;
 
-    /**
-     * 邮件发送地址
-     */
-    private String mSendEmailAddress;
-    /**
-     * 邮件抄送地址
-     */
-    private String mCopyEmailAddress;
-
-    public SendEmailCrashListener() {
-        this(DEFAULT_SEND_EMAIL_ADDRESS, DEFAULT_COPY_EMAIL_ADDRESS);
+    public SystemEmailCrashListener() {
+        this(XCrash.getToEmails(), XCrash.getCcEmails());
     }
 
     /**
      * 构造方法
      *
-     * @param sendEmailAddress 邮件发送地址
-     * @param copyEmailAddress 邮件抄送地址
+     * @param toEmails 邮件发送地址
+     * @param ccEmails 邮件抄送地址
      */
-    public SendEmailCrashListener(String sendEmailAddress, String copyEmailAddress) {
-        mSendEmailAddress = sendEmailAddress;
-        mCopyEmailAddress = copyEmailAddress;
+    public SystemEmailCrashListener(String[] toEmails, String[] ccEmails) {
+        mToEmails = toEmails;
+        mCcEmails = ccEmails;
+    }
+
+    /**
+     * 设置收件人邮件地址
+     *
+     * @param toEmails
+     * @return
+     */
+    public SystemEmailCrashListener setToEmails(String... toEmails) {
+        mToEmails = toEmails;
+        return this;
+    }
+
+    /**
+     * 设置抄送人邮件地址
+     *
+     * @param ccEmails
+     * @return
+     */
+    public SystemEmailCrashListener setCcEmails(String... ccEmails) {
+        mCcEmails = ccEmails;
+        return this;
     }
 
     /**
@@ -142,11 +156,14 @@ public class SendEmailCrashListener implements OnCrashListener {
             //这以下的内容，只做参考，因为没有服务器
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            String[] tos = {mSendEmailAddress};
-            String[] ccs = {mCopyEmailAddress};
-            intent.putExtra(Intent.EXTRA_EMAIL, tos); //收件人
-            intent.putExtra(Intent.EXTRA_CC, ccs);  //抄送者
-            intent.putExtra(Intent.EXTRA_BCC, ccs);  //密送者
+            String[] tos = mToEmails;
+            String[] ccs = mCcEmails;
+            //收件人
+            intent.putExtra(Intent.EXTRA_EMAIL, tos);
+            //抄送者
+            intent.putExtra(Intent.EXTRA_CC, ccs);
+            //密送者
+            intent.putExtra(Intent.EXTRA_BCC, ccs);
 
             intent.putExtra(Intent.EXTRA_SUBJECT,
                     context.getString(R.string.xlog_title_crash_report_email));
@@ -166,7 +183,7 @@ public class SendEmailCrashListener implements OnCrashListener {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, "当前设备无邮件应用，无法发送！", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.xlog_no_application_support, Toast.LENGTH_LONG).show();
         } finally {
             //禁止重启
             crashHandler.setIsNeedReopen(false);

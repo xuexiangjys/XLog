@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/XLog.iml" filepath="$PROJECT_DIR$/XLog.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/xlog-core/xlog-core.iml" filepath="$PROJECT_DIR$/xlog-core/xlog-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xlog-crash/xlog-crash.iml" filepath="$PROJECT_DIR$/xlog-crash/xlog-crash.iml" />
     </modules>
   </component>
 </project>

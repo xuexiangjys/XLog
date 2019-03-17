@@ -51,6 +51,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.support.app_compat
     implementation project(':xlog-core')
+    implementation project(':xlog-crash')
 
 //    implementation 'com.github.xuexiangjys:XLog:1.1.4'
 
