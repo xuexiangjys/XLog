@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
+    <!--标题栏的背景颜色-->
+    <attr name="xlog_crash_toolbar" format="reference|color" />
+    <!--标题栏的文字颜色-->
+    <attr name="xlog_crash_toolbar_text" format="reference|color" />
+    <!--标题栏中分享的文字颜色-->
+    <attr name="xlog_crash_toolbar_share_text" format="reference|color" />
+    <!--主题内容的背景颜色-->
+    <attr name="xlog_crash_content_background" format="reference|color" />
+    <!--lab的字体颜色-->
+    <attr name="xlog_crash_lab_text" format="reference|color" />
+    <!--内容信息的字体颜色-->
+    <attr name="xlog_crash_desc_text" format="reference|color" />
+</resources>

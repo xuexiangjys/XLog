@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/xlog_crash_menu_copy_text"
+        android:title="@string/xlog_crash_copy_text" />
+    <item
+        android:id="@+id/xlog_crash_menu_share_text"
+        android:title="@string/xlog_crash_share_text" />
+    <item
+        android:id="@+id/xlog_crash_menu_share_image"
+        android:title="@string/xlog_crash_share_image" />
+</menu>

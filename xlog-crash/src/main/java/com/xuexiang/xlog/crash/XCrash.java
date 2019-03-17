@@ -1,5 +1,7 @@
 package com.xuexiang.xlog.crash;
 
+import android.text.TextUtils;
+
 import com.xuexiang.xlog.crash.mail.MailInfo;
 
 /**
@@ -21,6 +23,9 @@ public class XCrash {
 
     private static volatile XCrash sInstance = null;
 
+    /**
+     * 整体的邮件信息
+     */
     private MailInfo mMailInfo;
     /**
      * 发送邮箱的地址
@@ -69,11 +74,24 @@ public class XCrash {
         return sInstance;
     }
 
+    /**
+     * 设置整体的邮件信息
+     *
+     * @param mailInfo
+     * @return
+     */
     public XCrash setMailInfo(MailInfo mailInfo) {
         mMailInfo = mailInfo;
         return this;
     }
 
+
+    /**
+     * 设置发件人的邮箱地址
+     *
+     * @param sendEmail
+     * @return
+     */
     public XCrash setSendEmail(String sendEmail) {
         mSendEmail = sendEmail;
         return this;
@@ -137,8 +155,31 @@ public class XCrash {
     //============get==============//
 
     public static MailInfo getMailInfo() {
+        if (!enableSendEmail()) {
+            return null;
+        }
+
+        if (getInstance().mMailInfo == null) {
+            return new MailInfo()
+                    .setAuthorizedUser(getSendEmail())
+                    .setAuthorizationCode(getAuthorizationCode())
+                    .setSendEmail(getSendEmail())
+                    .setToEmails(getToEmails())
+//                    .setCcEmails(getCcEmails())
+                    .setHost(getServerHost())
+                    .setPort(getServerPort());
+        }
         return getInstance().mMailInfo;
     }
+
+    /**
+     * @return 是否配置了可以发送邮件的信息
+     */
+    public static boolean enableSendEmail() {
+        return getInstance().mMailInfo != null
+                || (!TextUtils.isEmpty(getSendEmail()) && !TextUtils.isEmpty(getAuthorizationCode()) && getInstance().mToEmails != null);
+    }
+
 
     public static String getSendEmail() {
         return getInstance().mSendEmail;

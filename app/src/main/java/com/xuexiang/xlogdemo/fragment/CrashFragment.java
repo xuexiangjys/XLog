@@ -24,7 +24,7 @@ import com.xuexiang.xlog.crash.CrashHandler;
 import com.xuexiang.xlog.crash.XCrash;
 import com.xuexiang.xlog.crash.mail.AutomaticEmailCrashListener;
 import com.xuexiang.xlog.crash.mail.SystemEmailCrashListener;
-import com.xuexiang.xlogdemo.crash.ui.ShowActivityCrashListener;
+import com.xuexiang.xlog.crash.ui.ShowActivityCrashListener;
 import com.xuexiang.xlogdemo.crash.ui.ToastCrashListener;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.base.XPageSimpleListFragment;
@@ -66,7 +66,6 @@ public class CrashFragment extends XPageSimpleListFragment {
     @Override
     protected void initArgs() {
         super.initArgs();
-
         XCrash.getInstance()
                 .setSendEmail(DEFAULT_SEND_EMAIL_ADDRESS)
                 .setAuthorizationCode(DEFAULT_SEND_PASSWORD)

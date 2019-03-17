@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".crash.ui.CrashActivity" />
+        <activity android:name="com.xuexiang.xlog.crash.ui.CrashActivity" />
 
         <receiver android:name="com.xuexiang.xlog.crash.StartAppReceiver"/>
     </application>

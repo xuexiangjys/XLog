@@ -1,10 +1,9 @@
-package com.xuexiang.xlogdemo.crash.ui;
+package com.xuexiang.xlog.crash.ui;
 
 import android.content.Context;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Date;
 
 /**
  * 崩溃工具类
@@ -14,15 +13,14 @@ import java.util.Date;
  */
 public final class CrashUtils {
 
-
     private CrashUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    static CrashModel parseCrash(Context context, Throwable ex) {
-        CrashModel model = new CrashModel();
+    static CrashInfo parseCrash(Context context, Throwable ex) {
+        CrashInfo model = new CrashInfo();
         try {
-            model.setEx(ex);
+            model.setException(ex);
             model.setPackageName(context.getPackageName());
             model.setTime(System.currentTimeMillis());
             if (ex.getCause() != null) {
@@ -37,7 +35,6 @@ public final class CrashUtils {
 
             if (ex.getStackTrace() != null && ex.getStackTrace().length > 0) {
                 StackTraceElement element = ex.getStackTrace()[0];
-
                 model.setLineNumber(element.getLineNumber());
                 model.setClassName(element.getClassName());
                 model.setFileName(element.getFileName());

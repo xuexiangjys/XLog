@@ -12,14 +12,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="?attr/smToolbar">
+        android:background="?attr/xlog_crash_toolbar">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/simpleTitle"
-            android:textColor="?attr/smToolbarText"
+            android:text="@string/xlog_crash_title"
+            android:textColor="?attr/xlog_crash_toolbar_text"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -27,13 +27,13 @@
             android:id="@+id/tv_more"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:paddingStart="10dp"
-            android:paddingEnd="13dp"
-            android:text="@string/simpleShare"
-            android:textColor="?attr/smToolbarShareText"
+            android:paddingLeft="10dp"
+            android:paddingRight="13dp"
+            android:text="@string/xlog_crash_share"
+            android:textColor="?attr/xlog_crash_toolbar_share_text"
             android:textSize="15sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -42,7 +42,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/smContentBackground">
+        android:background="?attr/xlog_crash_content_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,15 +53,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/simpleCrashInfo"
-                android:textColor="?attr/smLabText"
+                android:text="@string/xlog_crash_crash_info"
+                android:textColor="?attr/xlog_crash_lab_text"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/smDescText"
+                android:textColor="?attr/xlog_crash_desc_text"
                 android:textSize="17sp"
                 tools:text="TextView" />
 
@@ -81,17 +81,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simplePackageName"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_packet_name"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_packageName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -104,17 +104,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleClassName"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_class_name"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_className"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -127,17 +127,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleFunName"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_method_name"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_methodName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -150,17 +150,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleLineNum"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_line_number"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_lineNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -173,17 +173,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleExceptionType"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_exception_type"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_exceptionType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -196,17 +196,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleTime"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_time"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -226,17 +226,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleModel"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_model"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_model"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -249,17 +249,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleBrand"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_brand"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_brand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -272,17 +272,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/simpleVersion"
-                    android:textColor="?attr/smLabText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:text="@string/xlog_crash_version"
+                    android:textColor="?attr/xlog_crash_lab_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
                 <TextView
                     android:id="@+id/tv_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:textColor="?attr/smDescText"
-                    android:textSize="@dimen/simple_text_item_size" />
+                    android:layout_marginLeft="7dp"
+                    android:textColor="?attr/xlog_crash_desc_text"
+                    android:textSize="@dimen/xlog_crash_text_item_size" />
 
             </LinearLayout>
 
@@ -296,16 +296,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/simpleAllInfo"
-                android:textColor="?attr/smLabText"
+                android:text="@string/xlog_crash_all_info"
+                android:textColor="?attr/xlog_crash_lab_text"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tv_fullException"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/smDescText"
-                android:textSize="@dimen/simple_text_item_size" />
+                android:textColor="?attr/xlog_crash_desc_text"
+                android:textSize="@dimen/xlog_crash_text_item_size" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

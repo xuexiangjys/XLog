@@ -1,0 +1,36 @@
+<resources>
+
+    <style name="XCrashTheme.Default" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/xlog_default_colorPrimaryDark</item>
+        <item name="xlog_crash_toolbar">@color/xlog_default_Toolbar</item>
+        <item name="xlog_crash_toolbar_text">@color/xlog_default_ToolbarText</item>
+        <item name="xlog_crash_toolbar_share_text">@color/xlog_default_ToolbarShareText</item>
+        <item name="xlog_crash_content_background">@color/xlog_default_ContentBackground</item>
+        <item name="xlog_crash_lab_text">@color/xlog_default_LabText</item>
+        <item name="xlog_crash_desc_text">@color/xlog_default_DescText</item>
+    </style>
+
+    <style name="XCrashTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/xlog_light_colorPrimaryDark</item>
+        <item name="xlog_crash_toolbar">@color/xlog_light_Toolbar</item>
+        <item name="xlog_crash_toolbar_text">@color/xlog_light_ToolbarText</item>
+        <item name="xlog_crash_toolbar_share_text">@color/xlog_light_ToolbarShareText</item>
+        <item name="xlog_crash_content_background">@color/xlog_light_ContentBackground</item>
+        <item name="xlog_crash_lab_text">@color/xlog_light_LabText</item>
+        <item name="xlog_crash_desc_text">@color/xlog_light_DescText</item>
+    </style>
+
+    <style name="XCrashTheme.Dark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/xlog_dark_colorPrimaryDark</item>
+        <item name="xlog_crash_toolbar">@color/xlog_dark_Toolbar</item>
+        <item name="xlog_crash_toolbar_text">@color/xlog_dark_ToolbarText</item>
+        <item name="xlog_crash_toolbar_share_text">@color/xlog_dark_ToolbarShareText</item>
+        <item name="xlog_crash_content_background">@color/xlog_dark_ContentBackground</item>
+        <item name="xlog_crash_lab_text">@color/xlog_dark_LabText</item>
+        <item name="xlog_crash_desc_text">@color/xlog_dark_DescText</item>
+    </style>
+
+</resources>

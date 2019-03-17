@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xuexiang.xlog.crash" >
+    package="com.xuexiang.xlog.crash">
 
+    <application>
+        <activity
+            android:name="com.xuexiang.xlog.crash.ui.CrashActivity"
+            android:theme="@style/XCrashTheme.Default" />
 
-
+    </application>
 
 
 </manifest>

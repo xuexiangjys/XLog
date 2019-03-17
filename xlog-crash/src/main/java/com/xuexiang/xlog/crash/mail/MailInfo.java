@@ -20,6 +20,8 @@
  */
 package com.xuexiang.xlog.crash.mail;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -46,7 +48,7 @@ import javax.mail.internet.MimeMultipart;
  * @author xuexiang
  * @since 2019/3/16 下午9:59
  */
-public class MailInfo extends Authenticator {
+public class MailInfo extends Authenticator implements Parcelable {
     /**
      * 邮箱授权用户名
      */
@@ -115,6 +117,30 @@ public class MailInfo extends Authenticator {
         mTitle = title;
         mContent = content;
     }
+
+    protected MailInfo(Parcel in) {
+        mAuthorizedUser = in.readString();
+        mAuthorizationCode = in.readString();
+        mHost = in.readString();
+        mPort = in.readString();
+        mSendEmail = in.readString();
+        mToEmails = in.createStringArray();
+        mCcEmails = in.createStringArray();
+        mTitle = in.readString();
+        mContent = in.readString();
+    }
+
+    public static final Creator<MailInfo> CREATOR = new Creator<MailInfo>() {
+        @Override
+        public MailInfo createFromParcel(Parcel in) {
+            return new MailInfo(in);
+        }
+
+        @Override
+        public MailInfo[] newArray(int size) {
+            return new MailInfo[size];
+        }
+    };
 
     public MailInfo setAuthorizedUser(String authorizedUser) {
         mAuthorizedUser = authorizedUser;
@@ -244,5 +270,23 @@ public class MailInfo extends Authenticator {
     @Override
     public PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(mAuthorizedUser, mAuthorizationCode);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mAuthorizedUser);
+        dest.writeString(mAuthorizationCode);
+        dest.writeString(mHost);
+        dest.writeString(mPort);
+        dest.writeString(mSendEmail);
+        dest.writeStringArray(mToEmails);
+        dest.writeStringArray(mCcEmails);
+        dest.writeString(mTitle);
+        dest.writeString(mContent);
     }
 }

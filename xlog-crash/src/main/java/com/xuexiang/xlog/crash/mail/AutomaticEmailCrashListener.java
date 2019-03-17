@@ -22,6 +22,10 @@ import java.io.File;
  */
 public class AutomaticEmailCrashListener implements OnCrashListener {
     /**
+     * 整体的邮件信息
+     */
+    private MailInfo mMailInfo;
+    /**
      * 发送邮箱的地址
      */
     private String mSendEmail;
@@ -48,6 +52,7 @@ public class AutomaticEmailCrashListener implements OnCrashListener {
 
     public AutomaticEmailCrashListener() {
         this(
+                XCrash.getMailInfo(),
                 XCrash.getSendEmail(),
                 XCrash.getAuthorizationCode(),
                 XCrash.getServerHost(),
@@ -67,13 +72,25 @@ public class AutomaticEmailCrashListener implements OnCrashListener {
      * @param toEmails     收件人的邮箱地址
      * @param ccEmails     抄送人的邮箱地址
      */
-    public AutomaticEmailCrashListener(String sendEmail, String sendPassword, String host, String port, String[] toEmails, String[] ccEmails) {
+    public AutomaticEmailCrashListener(MailInfo mailInfo, String sendEmail, String sendPassword, String host, String port, String[] toEmails, String[] ccEmails) {
+        mMailInfo = mailInfo;
         mSendEmail = sendEmail;
         mSendPassword = sendPassword;
         mServerHost = host;
         mServerPort = port;
         mToEmails = toEmails;
 //        mCcEmails = ccEmails;
+    }
+
+    /**
+     * 设置整体的邮件信息
+     *
+     * @param mailInfo
+     * @return
+     */
+    public AutomaticEmailCrashListener setMailInfo(MailInfo mailInfo) {
+        mMailInfo = mailInfo;
+        return this;
     }
 
     /**
@@ -190,16 +207,21 @@ public class AutomaticEmailCrashListener implements OnCrashListener {
      * @param crashReport
      */
     private void sendCrashReportEmail(Context context, ICrashHandler crashHandler, File crashLogFile, String crashReport) {
-        MailInfo sender = new MailInfo()
-                .setAuthorizedUser(mSendEmail)
-                .setAuthorizationCode(mSendPassword)
-                .setSendEmail(mSendEmail)
-                .setToEmails(mToEmails)
+        MailInfo sender;
+        if (mMailInfo == null) {
+            sender = new MailInfo()
+                    .setAuthorizedUser(mSendEmail)
+                    .setAuthorizationCode(mSendPassword)
+                    .setSendEmail(mSendEmail)
+                    .setToEmails(mToEmails)
 //                .setCcEmails(mCcEmails)
-                .setHost(mServerHost)
-                .setPort(mServerPort)
-                .setTitle(context.getString(R.string.xlog_title_crash_report_email) + "【" + TimeUtils.getCurTime("yyyy-MM-dd HH:mm:ss") + "】")
-                .setContent(crashReport);
+                    .setHost(mServerHost)
+                    .setPort(mServerPort)
+                    .setTitle(context.getString(R.string.xlog_title_crash_report_email) + "【" + TimeUtils.getCurTime("yyyy-MM-dd HH:mm:ss") + "】")
+                    .setContent(crashReport);
+        } else {
+            sender = mMailInfo;
+        }
         sender.init();
         try {
             sender.addAttachment(crashLogFile.getPath());
