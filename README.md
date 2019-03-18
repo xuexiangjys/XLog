@@ -237,6 +237,8 @@ XCrash.getInstance()
     .setCcEmails(DEFAULT_CC_EMAIL_ADDRESS);
 ```
 
+[通过Zapier绑定邮件和GitHub，自动提交issue的配置](https://github.com/wenmingvs/LogReport#github%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4issue%E7%9A%84%E9%85%8D%E7%BD%AE)
+
 当然，你也可以实现你自己的崩溃Crash处理，只需要实现OnCrashListener接口即可。
 
 2.设置崩溃日志的输出根目录为外部绝对路径【默认的存储目录地址：/storage/emulated/0/Android/data/com.xxx.xxx/cache/crash_log】

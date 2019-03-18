@@ -56,7 +56,7 @@ public class CrashFragment extends XPageSimpleListFragment {
     /**
      * 默认收件人地址
      */
-    private final static String DEFAULT_TO_EMAIL_ADDRESS = "xuexiangandroid@163.com";
+    private final static String DEFAULT_TO_EMAIL_ADDRESS = "xuexiangjys@gmail.com";
     /**
      * 默认抄收人地址
      */
