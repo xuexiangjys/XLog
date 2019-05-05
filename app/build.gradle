@@ -5,7 +5,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.xuexiang.xlogdemo"
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -50,21 +50,21 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.support.app_compat
-//    implementation project(':xlog-core')
-//    implementation project(':xlog-crash')
+    implementation project(':xlog-core')
+    implementation project(':xlog-crash')
 
-    implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.1'
-    implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.1'
+//    implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.1'
+//    implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.1'
 
-    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.3'
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
     //XPage
-    implementation 'com.github.xuexiangjys.XPage:xpage-lib:2.2.2'
-    annotationProcessor 'com.github.xuexiangjys.XPage:xpage-compiler:2.2.2'
+    implementation 'com.github.xuexiangjys.XPage:xpage-lib:2.2.5'
+    annotationProcessor 'com.github.xuexiangjys.XPage:xpage-compiler:2.2.5'
     //butterknife的sdk
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.3'
     //Gson序列化反序列化的依赖包
     implementation deps.gson
 }
